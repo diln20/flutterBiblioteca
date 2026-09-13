@@ -7,9 +7,11 @@ class WidgetSvgGallery extends StatelessWidget {
   const WidgetSvgGallery({
     super.key,
     required this.section,
+    this.compact = false,
   });
 
   final CourseSection section;
+  final bool compact;
 
   static const _root = 'assets/illustrations/widget-previews';
 
@@ -106,7 +108,7 @@ class WidgetSvgGallery extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(compact ? 14 : 20),
       decoration: BoxDecoration(
         color: scheme.surface,
         borderRadius: BorderRadius.circular(18),
@@ -118,29 +120,38 @@ class WidgetSvgGallery extends StatelessWidget {
           Row(
             children: [
               Container(
-                width: 38,
-                height: 38,
+                width: compact ? 34 : 38,
+                height: compact ? 34 : 38,
                 decoration: BoxDecoration(
                   color: accent.withValues(alpha: .10),
                   borderRadius: BorderRadius.circular(11),
                 ),
-                child: Icon(Icons.phone_iphone_rounded, color: accent),
+                child: Icon(
+                  Icons.phone_iphone_rounded,
+                  color: accent,
+                  size: compact ? 19 : 22,
+                ),
               ),
               const SizedBox(width: 10),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Widgets en acción',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
+                      style: TextStyle(
+                        fontSize: compact ? 14 : 16,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
                     const SizedBox(height: 3),
                     Text(
                       'Mira cómo se ven los widgets de esta lección dentro de una app móvil.',
+                      maxLines: compact ? 2 : null,
+                      overflow: compact ? TextOverflow.ellipsis : null,
                       style: TextStyle(
                         color: scheme.onSurfaceVariant,
-                        fontSize: 12,
+                        fontSize: compact ? 10.5 : 12,
                         height: 1.4,
                       ),
                     ),
@@ -149,27 +160,50 @@ class WidgetSvgGallery extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 18),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              final twoColumns = constraints.maxWidth >= 760;
-              final cardWidth = twoColumns
-                  ? (constraints.maxWidth - 14) / 2
-                  : constraints.maxWidth;
-
-              return Wrap(
-                spacing: 14,
-                runSpacing: 14,
-                children: [
-                  for (final visual in visuals)
-                    SizedBox(
-                      width: cardWidth,
-                      child: _VisualCard(visual: visual, accent: accent),
+          SizedBox(height: compact ? 12 : 18),
+          if (compact)
+            SizedBox(
+              height: 252,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: visuals.length,
+                separatorBuilder: (_, __) => const SizedBox(width: 12),
+                itemBuilder: (context, index) {
+                  return SizedBox(
+                    width: 320,
+                    child: _VisualCard(
+                      visual: visuals[index],
+                      accent: accent,
+                      compact: true,
                     ),
-                ],
-              );
-            },
-          ),
+                  );
+                },
+              ),
+            )
+          else
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final twoColumns = constraints.maxWidth >= 760;
+                final cardWidth = twoColumns
+                    ? (constraints.maxWidth - 14) / 2
+                    : constraints.maxWidth;
+
+                return Wrap(
+                  spacing: 14,
+                  runSpacing: 14,
+                  children: [
+                    for (final visual in visuals)
+                      SizedBox(
+                        width: cardWidth,
+                        child: _VisualCard(
+                          visual: visual,
+                          accent: accent,
+                        ),
+                      ),
+                  ],
+                );
+              },
+            ),
         ],
       ),
     );
@@ -177,10 +211,15 @@ class WidgetSvgGallery extends StatelessWidget {
 }
 
 class _VisualCard extends StatelessWidget {
-  const _VisualCard({required this.visual, required this.accent});
+  const _VisualCard({
+    required this.visual,
+    required this.accent,
+    this.compact = false,
+  });
 
   final _WidgetVisual visual;
   final Color accent;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -210,23 +249,32 @@ class _VisualCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
+            padding: EdgeInsets.fromLTRB(
+              compact ? 12 : 14,
+              compact ? 9 : 12,
+              compact ? 12 : 14,
+              compact ? 10 : 14,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   visual.title,
-                  style: const TextStyle(
-                    fontSize: 13,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: compact ? 12 : 13,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   visual.subtitle,
+                  maxLines: compact ? 2 : null,
+                  overflow: compact ? TextOverflow.ellipsis : null,
                   style: TextStyle(
                     color: scheme.onSurfaceVariant,
-                    fontSize: 11,
+                    fontSize: compact ? 10 : 11,
                     height: 1.35,
                   ),
                 ),
