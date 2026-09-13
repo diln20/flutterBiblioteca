@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../models/course_section.dart';
 import '../services/library_controller.dart';
+import 'guided_project_panel.dart';
 import 'section_detail_enriched.dart';
 import 'widget_mobile_preview.dart';
 import 'widget_svg_gallery.dart';
 
-/// Compone la lección escrita con representaciones visuales de la interfaz.
-///
-/// Cada lección Flutter muestra una preview real construida con widgets y una
-/// galería SVG que explica cómo se ven los widgets concretos dentro de un móvil.
+/// Compone la lección escrita con representaciones visuales y una práctica
+/// incremental sobre la misma aplicación: "Mi Biblioteca".
 class LessonDetailView extends StatelessWidget {
   const LessonDetailView({
     super.key,
@@ -38,7 +37,7 @@ class LessonDetailView extends StatelessWidget {
           return Row(
             children: [
               SizedBox(
-                width: 400,
+                width: 420,
                 child: _DesktopPreview(section: section),
               ),
               const VerticalDivider(width: 1),
@@ -61,6 +60,8 @@ class LessonDetailView extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
                 child: WidgetSvgGallery(section: section, compact: true),
               ),
+            if (GuidedProjectPanel.supports(section))
+              _CompactProjectStep(section: section),
             const Divider(height: 1),
             Expanded(
               child: SectionDetail(
@@ -144,7 +145,7 @@ class _DesktopPreview extends StatelessWidget {
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
-                      'La preview superior es interactiva. Debajo tienes diagramas SVG que señalan cada widget dentro de una interfaz móvil.',
+                      'La preview superior es interactiva. Debajo tienes diagramas SVG que señalan cada widget y el paso práctico para continuar la misma aplicación.',
                       style: TextStyle(fontSize: 10.5, height: 1.4),
                     ),
                   ),
@@ -155,9 +156,93 @@ class _DesktopPreview extends StatelessWidget {
               const SizedBox(height: 18),
               WidgetSvgGallery(section: section),
             ],
+            if (GuidedProjectPanel.supports(section)) ...[
+              const SizedBox(height: 18),
+              GuidedProjectPanel(section: section),
+            ],
           ],
         ),
       ),
+    );
+  }
+}
+
+class _CompactProjectStep extends StatelessWidget {
+  const _CompactProjectStep({required this.section});
+
+  final CourseSection section;
+
+  @override
+  Widget build(BuildContext context) {
+    final accent = Color(section.accentValue);
+    final scheme = Theme.of(context).colorScheme;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+      child: Material(
+        color: Color.alphaBlend(accent.withValues(alpha: .07), scheme.surface),
+        borderRadius: BorderRadius.circular(16),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: () => _showProjectStep(context),
+          child: Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: accent.withValues(alpha: .24)),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 38,
+                  height: 38,
+                  decoration: BoxDecoration(
+                    color: accent.withValues(alpha: .12),
+                    borderRadius: BorderRadius.circular(11),
+                  ),
+                  child: Icon(Icons.construction_rounded, color: accent, size: 20),
+                ),
+                const SizedBox(width: 11),
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Continúa construyendo Mi Biblioteca',
+                        style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w900),
+                      ),
+                      SizedBox(height: 3),
+                      Text(
+                        'Archivos a crear/modificar, tareas y resultado esperado de esta lección.',
+                        style: TextStyle(fontSize: 10.5, height: 1.35),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Icon(Icons.arrow_forward_rounded, color: accent),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showProjectStep(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (context) {
+        return FractionallySizedBox(
+          heightFactor: .9,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(16, 4, 16, 28),
+            child: GuidedProjectPanel(section: section),
+          ),
+        );
+      },
     );
   }
 }
@@ -275,7 +360,15 @@ class _CompactPreview extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 18),
                                 Expanded(
-                                  child: WidgetSvgGallery(section: section),
+                                  child: Column(
+                                    children: [
+                                      WidgetSvgGallery(section: section),
+                                      if (GuidedProjectPanel.supports(section)) ...[
+                                        const SizedBox(height: 18),
+                                        GuidedProjectPanel(section: section),
+                                      ],
+                                    ],
+                                  ),
                                 ),
                               ],
                             );
@@ -285,6 +378,10 @@ class _CompactPreview extends StatelessWidget {
                               WidgetMobilePreview(section: section),
                               const SizedBox(height: 18),
                               WidgetSvgGallery(section: section),
+                              if (GuidedProjectPanel.supports(section)) ...[
+                                const SizedBox(height: 18),
+                                GuidedProjectPanel(section: section),
+                              ],
                             ],
                           );
                         },
