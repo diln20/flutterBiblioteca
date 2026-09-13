@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#081426"/>
+      <stop offset="1" stop-color="#102A43"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="420" rx="32" fill="url(#bg)"/>
+  <circle cx="125" cy="210" r="62" fill="#38BDF8" opacity=".15"/>
+  <rect x="78" y="172" width="94" height="76" rx="18" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
+  <text x="125" y="203" text-anchor="middle" fill="#E0F2FE" font-size="18" font-family="Arial" font-weight="700">State</text>
+  <text x="125" y="228" text-anchor="middle" fill="#7DD3FC" font-size="13" font-family="Arial">mounted</text>
+  <path d="M194 210 H280" stroke="#38BDF8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M266 198 L282 210 L266 222" fill="none" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <g font-family="Arial" text-anchor="middle">
+    <rect x="300" y="84" width="145" height="56" rx="18" fill="#0F172A" stroke="#22D3EE" stroke-width="2"/>
+    <text x="372" y="118" fill="#CFFAFE" font-size="17" font-weight="700">initState</text>
+    <rect x="300" y="182" width="145" height="56" rx="18" fill="#0F172A" stroke="#A78BFA" stroke-width="2"/>
+    <text x="372" y="216" fill="#EDE9FE" font-size="17" font-weight="700">build</text>
+    <rect x="300" y="280" width="145" height="56" rx="18" fill="#0F172A" stroke="#FB7185" stroke-width="2"/>
+    <text x="372" y="314" fill="#FFE4E6" font-size="17" font-weight="700">dispose</text>
+  </g>
+  <path d="M372 140 V178" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M372 238 V276" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+  <rect x="500" y="122" width="148" height="176" rx="24" fill="#0B1220" stroke="#334155" stroke-width="2"/>
+  <text x="574" y="164" text-anchor="middle" fill="#F8FAFC" font-size="16" font-family="Arial" font-weight="700">BuildContext</text>
+  <path d="M530 204 h88 M530 232 h66 M530 260 h78" stroke="#475569" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="613" cy="232" r="7" fill="#34D399"/>
+</svg>
