@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../data/catalog/dart_lesson_content.dart';
+import '../data/catalog/flutter_extended_lesson_content.dart';
 import '../data/catalog/flutter_lesson_content.dart';
 import '../models/course_section.dart';
 import '../models/lesson_content.dart';
 import '../services/library_controller.dart';
+import 'lesson_illustration.dart';
 
 class SectionDetail extends StatelessWidget {
   const SectionDetail({
@@ -19,7 +21,9 @@ class SectionDetail extends StatelessWidget {
   final ValueChanged<CourseSection>? onNavigate;
 
   LessonContent? get lesson =>
-      dartLessonContent[section.id] ?? flutterLessonContent[section.id];
+      dartLessonContent[section.id] ??
+      flutterLessonContent[section.id] ??
+      flutterExtendedLessonContent[section.id];
 
   @override
   Widget build(BuildContext context) {
@@ -253,6 +257,8 @@ class _Hero extends StatelessWidget {
               color: scheme.onSurfaceVariant,
             ),
           ),
+          const SizedBox(height: 22),
+          LessonIllustration(section: section),
         ],
       ),
     );
