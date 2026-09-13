@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../models/course_section.dart';
+import 'widget_individual_gallery.dart';
 
 /// Imagen principal de cada lección Flutter.
 ///
 /// El poster se muestra dentro del contenido de la lección para que el
 /// estudiante relacione inmediatamente el concepto con una interfaz móvil.
+/// Debajo incluye una galería con una imagen individual por widget.
 class LessonVisualPoster extends StatelessWidget {
   const LessonVisualPoster({
     super.key,
@@ -146,6 +148,16 @@ class LessonVisualPoster extends StatelessWidget {
               ],
             ),
           ),
+          if (WidgetIndividualGallery.supports(section)) ...[
+            Divider(height: 1, color: scheme.outlineVariant),
+            Padding(
+              padding: const EdgeInsets.all(14),
+              child: WidgetIndividualGallery(
+                section: section,
+                compact: true,
+              ),
+            ),
+          ],
         ],
       ),
     );
