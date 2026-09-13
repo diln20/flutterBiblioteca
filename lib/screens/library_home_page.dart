@@ -4,11 +4,19 @@ import '../models/course_section.dart';
 import '../services/library_controller.dart';
 import '../widgets/library_filters.dart';
 import '../widgets/library_sidebar.dart';
+import '../widgets/progress_dashboard.dart';
 import '../widgets/section_card.dart';
 import '../widgets/section_detail_enriched.dart';
 
 class LibraryHomePage extends StatefulWidget {
-  const LibraryHomePage({super.key});
+  const LibraryHomePage({
+    super.key,
+    required this.themeMode,
+    required this.onThemeModeChanged,
+  });
+
+  final ThemeMode themeMode;
+  final ValueChanged<ThemeMode> onThemeModeChanged;
 
   @override
   State<LibraryHomePage> createState() => _LibraryHomePageState();
@@ -31,35 +39,68 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, _) {
         return Scaffold(
           appBar: AppBar(
             titleSpacing: 20,
-            title: const Column(
+            title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Biblioteca Dart + Flutter',
                   style: TextStyle(fontWeight: FontWeight.w800),
                 ),
                 Text(
-                  'Dart desde cero → Flutter paso a paso',
-                  style: TextStyle(fontSize: 12, color: Colors.white60),
+                  'Dart desde cero · Flutter paso a paso · Proyectos',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: scheme.onSurfaceVariant,
+                  ),
                 ),
               ],
             ),
             actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 18),
-                child: Center(
-                  child: Text(
-                    '${_controller.completed.length}/${_controller.total} completadas',
-                    style: const TextStyle(color: Colors.white70),
+              if (MediaQuery.sizeOf(context).width >= 720)
+                Padding(
+                  padding: const EdgeInsets.only(right: 6),
+                  child: Center(
+                    child: Text(
+                      '${_controller.completed.length}/${_controller.total} completadas',
+                      style: TextStyle(color: scheme.onSurfaceVariant),
+                    ),
                   ),
                 ),
+              PopupMenuButton<ThemeMode>(
+                tooltip: 'Cambiar tema',
+                initialValue: widget.themeMode,
+                onSelected: widget.onThemeModeChanged,
+                icon: Icon(
+                  widget.themeMode == ThemeMode.light
+                      ? Icons.light_mode_rounded
+                      : widget.themeMode == ThemeMode.dark
+                          ? Icons.dark_mode_rounded
+                          : Icons.brightness_auto_rounded,
+                ),
+                itemBuilder: (context) => const [
+                  PopupMenuItem(
+                    value: ThemeMode.system,
+                    child: Text('Tema del sistema'),
+                  ),
+                  PopupMenuItem(
+                    value: ThemeMode.light,
+                    child: Text('Tema claro'),
+                  ),
+                  PopupMenuItem(
+                    value: ThemeMode.dark,
+                    child: Text('Tema oscuro'),
+                  ),
+                ],
               ),
+              const SizedBox(width: 8),
             ],
           ),
           body: LayoutBuilder(
@@ -68,14 +109,22 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
                 return Row(
                   children: [
                     SizedBox(
-                      width: 360,
+                      width: 380,
                       child: LibrarySidebar(controller: _controller),
                     ),
                     const VerticalDivider(width: 1),
                     Expanded(
-                      child: SectionDetail(
-                        section: _controller.selected,
-                        controller: _controller,
+                      child: Column(
+                        children: [
+                          ProgressDashboard(controller: _controller),
+                          const Divider(height: 1),
+                          Expanded(
+                            child: SectionDetail(
+                              section: _controller.selected,
+                              controller: _controller,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -98,38 +147,21 @@ class _MobileLibrary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sections = controller.filtered;
+    final scheme = Theme.of(context).colorScheme;
+
     return Column(
       children: [
+        ProgressDashboard(controller: controller),
         LibraryFilters(controller: controller),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: [
-              Expanded(
-                child: LinearProgressIndicator(
-                  value: controller.progress,
-                  minHeight: 6,
-                  borderRadius: BorderRadius.circular(99),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Text(
-                '${(controller.progress * 100).round()}%',
-                style: const TextStyle(color: Colors.white54, fontSize: 12),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 8),
         Expanded(
           child: sections.isEmpty
-              ? const Center(
+              ? Center(
                   child: Padding(
-                    padding: EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(24),
                     child: Text(
                       'No hay temas que coincidan con los filtros.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white54),
+                      style: TextStyle(color: scheme.onSurfaceVariant),
                     ),
                   ),
                 )
@@ -148,8 +180,8 @@ class _MobileLibrary extends StatelessWidget {
                             padding: const EdgeInsets.fromLTRB(4, 14, 4, 8),
                             child: Text(
                               section.group.toUpperCase(),
-                              style: const TextStyle(
-                                color: Colors.white54,
+                              style: TextStyle(
+                                color: scheme.onSurfaceVariant,
                                 fontSize: 10,
                                 fontWeight: FontWeight.w900,
                                 letterSpacing: 1,
