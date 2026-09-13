@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1A1020"/><stop offset="1" stop-color="#321523"/></linearGradient></defs>
+  <rect width="720" height="420" rx="32" fill="url(#bg)"/>
+  <text x="54" y="68" fill="#FFF1F2" font-family="Arial" font-size="23" font-weight="700">Motion explains change</text>
+  <text x="54" y="98" fill="#FDA4AF" font-family="Arial" font-size="14">AnimatedContainer · AnimatedSwitcher · Tween</text>
+  <path d="M92 310 C170 130 255 332 336 180 S500 108 632 234" fill="none" stroke="#FB7185" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 12"/>
+  <g>
+    <circle cx="108" cy="282" r="32" fill="#FB7185" opacity=".3"/>
+    <circle cx="108" cy="282" r="17" fill="#FB7185"/>
+    <rect x="258" y="150" width="88" height="88" rx="18" fill="#881337" opacity=".55" stroke="#FDA4AF" stroke-width="2"/>
+    <rect x="469" y="105" width="118" height="118" rx="30" fill="#4C0519" stroke="#FB7185" stroke-width="3"/>
+    <circle cx="632" cy="234" r="36" fill="#FFF1F2" opacity=".9"/>
+    <circle cx="632" cy="234" r="14" fill="#E11D48"/>
+  </g>
+  <g font-family="Arial" font-size="13" fill="#FFE4E6" text-anchor="middle">
+    <text x="108" y="340">start</text>
+    <text x="302" y="264">interpolate</text>
+    <text x="528" y="254">ease</text>
+    <text x="632" y="298">state</text>
+  </g>
+</svg>
