@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+<style>.bg{fill:#f8fbff}.phone{fill:#111827}.screen{fill:#f8fafc}.bar{fill:#ec4899}.card{fill:#fff;stroke:#e2e8f0;stroke-width:2}.dialog{fill:#fff;stroke:#f9a8d4;stroke-width:2}.snack{fill:#0f172a}.sheet{fill:#fff;stroke:#cbd5e1;stroke-width:2}.title{font:700 22px Arial;fill:#0f172a}.small{font:500 14px Arial;fill:#64748b}.white{font:700 18px Arial;fill:#fff}.label{font:700 17px Arial}.pill{fill:#fce7f3}.pill2{fill:#ccfbf1}.pill3{fill:#dbeafe}.line{stroke-width:3;stroke-dasharray:7 7;fill:none}</style>
+<rect width="900" height="560" rx="36" class="bg"/><circle cx="90" cy="90" r="76" fill="#fce7f3"/><circle cx="820" cy="480" r="110" fill="#ccfbf1"/>
+<text x="50" y="74" class="title">SnackBar, Dialog y BottomSheet</text><text x="50" y="103" class="small">Feedback y acciones secundarias</text>
+<rect x="286" y="28" width="328" height="504" rx="48" class="phone"/><rect x="306" y="48" width="288" height="464" rx="34" class="screen"/>
+<rect x="306" y="82" width="288" height="68" class="bar"/><text x="380" y="124" class="white">Mis libros</text>
+<rect x="334" y="182" width="232" height="88" rx="18" class="card"/><text x="354" y="216" class="title" style="font-size:18px">Clean Code</text><text x="354" y="242" class="small">Robert C. Martin</text>
+<rect x="348" y="290" width="204" height="118" rx="20" class="dialog"/><text x="368" y="323" class="title" style="font-size:18px">Eliminar libro</text><text x="368" y="350" class="small">¿Deseas continuar?</text><text x="370" y="386" style="font:700 14px Arial;fill:#64748b">Cancelar</text><text x="468" y="386" style="font:700 14px Arial;fill:#ec4899">Eliminar</text>
+<rect x="326" y="425" width="248" height="48" rx="14" class="snack"/><text x="348" y="455" class="white" style="font-size:14px">Libro guardado correctamente</text>
+<path d="M326 492 Q326 462 356 462 H544 Q574 462 574 492 V512 H326Z" class="sheet"/><rect x="415" y="474" width="70" height="5" rx="3" fill="#cbd5e1"/><text x="380" y="503" class="small">Filtros rápidos</text>
+<rect x="54" y="286" width="176" height="56" rx="18" class="pill"/><text x="107" y="320" class="label" fill="#be185d">Dialog</text><path d="M230 314H348" stroke="#ec4899" class="line"/>
+<rect x="650" y="420" width="176" height="56" rx="18" class="pill3"/><text x="697" y="454" class="label" fill="#2563eb">SnackBar</text><path d="M650 448H574" stroke="#2563eb" class="line"/>
+<rect x="646" y="486" width="180" height="56" rx="18" class="pill2"/><text x="672" y="520" class="label" fill="#0f766e">BottomSheet</text><path d="M646 514H574" stroke="#14b8a6" class="line"/>
+</svg>
