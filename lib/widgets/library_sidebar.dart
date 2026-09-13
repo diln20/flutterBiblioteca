@@ -15,18 +15,20 @@ class LibrarySidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sections = controller.filtered;
+    final scheme = Theme.of(context).colorScheme;
+
     return Container(
-      color: const Color(0xFF081321),
+      color: scheme.surfaceContainerLowest,
       child: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16, 18, 16, 0),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 18, 16, 0),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 'RUTA DE APRENDIZAJE',
                 style: TextStyle(
-                  color: Colors.white54,
+                  color: scheme.onSurfaceVariant,
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
                   letterSpacing: 1.1,
@@ -45,15 +47,15 @@ class LibrarySidebar extends StatelessWidget {
                   children: [
                     Text(
                       '${controller.completed.length} de ${controller.total} completadas',
-                      style: const TextStyle(
-                        color: Colors.white54,
+                      style: TextStyle(
+                        color: scheme.onSurfaceVariant,
                         fontSize: 11,
                       ),
                     ),
                     Text(
                       '${(controller.progress * 100).round()}%',
-                      style: const TextStyle(
-                        color: Colors.white54,
+                      style: TextStyle(
+                        color: scheme.onSurfaceVariant,
                         fontSize: 11,
                       ),
                     ),
@@ -70,13 +72,13 @@ class LibrarySidebar extends StatelessWidget {
           ),
           Expanded(
             child: sections.isEmpty
-                ? const Center(
+                ? Center(
                     child: Padding(
-                      padding: EdgeInsets.all(24),
+                      padding: const EdgeInsets.all(24),
                       child: Text(
                         'No hay temas que coincidan con los filtros.',
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white54),
+                        style: TextStyle(color: scheme.onSurfaceVariant),
                       ),
                     ),
                   )
@@ -138,6 +140,7 @@ class _GroupHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).colorScheme.onSurfaceVariant;
     return Padding(
       padding: const EdgeInsets.fromLTRB(4, 14, 4, 9),
       child: Row(
@@ -145,8 +148,8 @@ class _GroupHeader extends StatelessWidget {
           Expanded(
             child: Text(
               label.toUpperCase(),
-              style: const TextStyle(
-                color: Colors.white54,
+              style: TextStyle(
+                color: color,
                 fontSize: 10,
                 fontWeight: FontWeight.w900,
                 letterSpacing: 1,
@@ -155,8 +158,8 @@ class _GroupHeader extends StatelessWidget {
           ),
           Text(
             '$completed/$total',
-            style: const TextStyle(
-              color: Colors.white38,
+            style: TextStyle(
+              color: color,
               fontSize: 10,
               fontWeight: FontWeight.w700,
             ),
