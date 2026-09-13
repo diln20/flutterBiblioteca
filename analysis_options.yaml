@@ -8,3 +8,7 @@ analyzer:
     - linux/**
     - macos/**
     - windows/**
+
+linter:
+  rules:
+    unnecessary_underscores: false
