@@ -3,6 +3,8 @@ name: Flutter quality
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
   pull_request:
 
 jobs:
