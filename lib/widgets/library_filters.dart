@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+
+import '../services/library_controller.dart';
+
+class LibraryFilters extends StatelessWidget {
+  const LibraryFilters({
+    super.key,
+    required this.controller,
+  });
+
+  final LibraryController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextField(
+            onChanged: controller.setQuery,
+            decoration: const InputDecoration(
+              hintText: 'Buscar tema, categoría o concepto',
+              prefixIcon: Icon(Icons.search),
+            ),
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 38,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: controller.groups.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 8),
+              itemBuilder: (_, index) {
+                final group = controller.groups[index];
+                return ChoiceChip(
+                  label: Text(group),
+                  selected: controller.group == group,
+                  onSelected: (_) => controller.setGroup(group),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 10),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: FilterChip(
+              avatar: const Icon(Icons.star_outline, size: 18),
+              label: const Text('Solo favoritos'),
+              selected: controller.favoritesOnly,
+              onSelected: (_) => controller.toggleFavoritesOnly(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
