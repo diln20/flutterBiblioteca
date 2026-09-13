@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+<style>.bg{fill:#f8fbff}.phone{fill:#111827}.screen{fill:#fff}.bar{fill:#7c3aed}.nav{fill:#f8fafc;stroke:#e2e8f0;stroke-width:2}.tab{fill:#ede9fe}.drawer{fill:#fff;stroke:#c4b5fd;stroke-width:2}.title{font:700 22px Arial;fill:#0f172a}.small{font:500 14px Arial;fill:#64748b}.white{font:700 18px Arial;fill:#fff}.label{font:700 17px Arial}.pill{fill:#ede9fe}.pill2{fill:#ccfbf1}.pill3{fill:#dbeafe}.line{stroke-width:3;stroke-dasharray:7 7;fill:none}</style>
+<rect width="900" height="560" rx="36" class="bg"/><circle cx="90" cy="90" r="75" fill="#ede9fe"/><circle cx="820" cy="480" r="110" fill="#dbeafe"/>
+<text x="50" y="74" class="title">Navigator, TabBar y Drawer</text><text x="50" y="103" class="small">Patrones de navegación dentro de una app</text>
+<rect x="286" y="28" width="328" height="504" rx="48" class="phone"/><rect x="306" y="48" width="288" height="464" rx="34" class="screen"/>
+<rect x="306" y="82" width="288" height="68" class="bar"/><text x="330" y="124" class="white">☰</text><text x="388" y="124" class="white">Biblioteca</text>
+<rect x="330" y="170" width="240" height="48" rx="16" class="tab"/><text x="355" y="200" class="small">Inicio</text><text x="430" y="200" class="small">Cursos</text><text x="506" y="200" class="small">Perfil</text>
+<rect x="330" y="242" width="240" height="168" rx="20" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/><text x="356" y="280" class="title">Detalle del curso</text><text x="356" y="310" class="small">Navigator.push abre esta</text><text x="356" y="334" class="small">pantalla y pop regresa.</text><rect x="356" y="360" width="115" height="32" rx="12" fill="#7c3aed"/><text x="382" y="381" class="white" style="font-size:14px">Volver</text>
+<rect x="306" y="438" width="288" height="74" class="nav"/><text x="345" y="478" class="small">⌂ Inicio</text><text x="424" y="478" class="small">▣ Cursos</text><text x="514" y="478" class="small">● Perfil</text>
+<rect x="60" y="182" width="172" height="56" rx="18" class="pill"/><text x="102" y="216" class="label" fill="#7c3aed">Drawer</text><path d="M232 210H306" stroke="#8b5cf6" class="line"/>
+<rect x="650" y="178" width="172" height="56" rx="18" class="pill2"/><text x="700" y="212" class="label" fill="#0f766e">TabBar</text><path d="M650 206H570" stroke="#14b8a6" class="line"/>
+<rect x="650" y="318" width="172" height="56" rx="18" class="pill3"/><text x="688" y="352" class="label" fill="#2563eb">Navigator</text><path d="M650 346H570" stroke="#2563eb" class="line"/>
+</svg>
