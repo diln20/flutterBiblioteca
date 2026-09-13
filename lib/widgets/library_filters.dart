@@ -20,7 +20,7 @@ class LibraryFilters extends StatelessWidget {
           TextField(
             onChanged: controller.setQuery,
             decoration: const InputDecoration(
-              hintText: 'Buscar tema, categoría o concepto',
+              hintText: 'Buscar tema, categoria o concepto',
               prefixIcon: Icon(Icons.search),
             ),
           ),
@@ -37,6 +37,23 @@ class LibraryFilters extends StatelessWidget {
                   label: Text(group),
                   selected: controller.group == group,
                   onSelected: (_) => controller.setGroup(group),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 38,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: controller.levels.length,
+              separatorBuilder: (_, _) => const SizedBox(width: 8),
+              itemBuilder: (context, index) {
+                final itemLevel = controller.levels[index];
+                return ChoiceChip(
+                  label: Text(itemLevel),
+                  selected: controller.level == itemLevel,
+                  onSelected: (_) => controller.setLevel(itemLevel),
                 );
               },
             ),
