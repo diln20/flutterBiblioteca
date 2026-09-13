@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../models/course_section.dart';
 import '../services/library_controller.dart';
+import '../widgets/lesson_detail_view.dart';
 import '../widgets/library_filters.dart';
 import '../widgets/library_sidebar.dart';
 import '../widgets/progress_dashboard.dart';
 import '../widgets/section_card.dart';
-import '../widgets/section_detail_enriched.dart';
 
 class LibraryHomePage extends StatefulWidget {
   const LibraryHomePage({
@@ -119,7 +119,7 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
                           ProgressDashboard(controller: _controller),
                           const Divider(height: 1),
                           Expanded(
-                            child: SectionDetail(
+                            child: LessonDetailView(
                               section: _controller.selected,
                               controller: _controller,
                             ),
@@ -212,7 +212,7 @@ class _MobileLibrary extends StatelessWidget {
           builder: (context, _) {
             return Scaffold(
               appBar: AppBar(title: Text(controller.selected.title)),
-              body: SectionDetail(
+              body: LessonDetailView(
                 section: controller.selected,
                 controller: controller,
                 onNavigate: (_) {},
