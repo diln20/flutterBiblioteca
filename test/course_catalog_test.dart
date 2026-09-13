@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_biblioteca/data/course_catalog.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('course catalog has unique ids', () {
@@ -11,9 +11,74 @@ void main() {
     for (final section in courseCatalog) {
       expect(section.title.trim(), isNotEmpty);
       expect(section.description.trim(), isNotEmpty);
+      expect(section.whyItMatters.trim(), isNotEmpty);
+      expect(section.code.trim(), isNotEmpty);
       expect(section.steps.length, greaterThanOrEqualTo(3));
       expect(section.challenge.trim(), isNotEmpty);
       expect(section.keywords, isNotEmpty);
+    }
+  });
+
+  test('the learning route starts with the complete Dart basics stage', () {
+    const expectedDartIds = <String>[
+      'dart-01-introduccion',
+      'dart-02-variables-constantes',
+      'dart-03-tipos-datos',
+      'dart-04-operadores',
+      'dart-05-strings',
+      'dart-06-conversion-entrada',
+      'dart-07-condicionales',
+      'dart-08-switch',
+      'dart-09-bucles',
+      'dart-10-colecciones',
+      'dart-11-funciones',
+      'dart-12-scope-callbacks',
+      'dart-13-null-safety',
+      'dart-14-clases-objetos',
+      'dart-15-poo',
+      'dart-16-excepciones',
+      'dart-17-async',
+      'dart-18-imports-paquetes',
+      'dart-19-proyecto-integrador',
+    ];
+
+    final firstStageIds = courseCatalog
+        .take(expectedDartIds.length)
+        .map((section) => section.id)
+        .toList();
+
+    expect(firstStageIds, expectedDartIds);
+    expect(
+      courseCatalog.take(expectedDartIds.length).every(
+            (section) => section.group == 'Dart básico',
+          ),
+      isTrue,
+    );
+    expect(courseCatalog[expectedDartIds.length].id, 'flutter-intro');
+  });
+
+  test('Dart basics covers the essential language concepts', () {
+    final dartKeywords = courseCatalog
+        .where((section) => section.group == 'Dart básico')
+        .expand((section) => section.keywords)
+        .map((keyword) => keyword.toLowerCase())
+        .toSet();
+
+    for (final concept in <String>[
+      'variables',
+      'operadores',
+      'if',
+      'switch',
+      'for',
+      'list',
+      'funciones',
+      'null safety',
+      'clases',
+      'try',
+      'future',
+      'import',
+    ]) {
+      expect(dartKeywords, contains(concept));
     }
   });
 }
