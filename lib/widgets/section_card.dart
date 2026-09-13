@@ -45,9 +45,9 @@ class SectionCard extends StatelessWidget {
           ),
           child: LayoutBuilder(
             builder: (context, constraints) {
-              final wide = constraints.maxWidth >= 560;
+              final horizontal = constraints.maxWidth >= 300;
               final illustration = SizedBox(
-                width: wide ? 150 : double.infinity,
+                width: horizontal ? 104 : double.infinity,
                 child: LessonIllustration(section: section, compact: true),
               );
               final content = _CardContent(
@@ -59,12 +59,12 @@ class SectionCard extends StatelessWidget {
                 onFavorite: () => controller.toggleFavorite(section.id),
               );
 
-              if (wide) {
+              if (horizontal) {
                 return Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     illustration,
-                    const SizedBox(width: 16),
+                    const SizedBox(width: 14),
                     Expanded(child: content),
                   ],
                 );
@@ -111,7 +111,7 @@ class _CardContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Wrap(
-          spacing: 8,
+          spacing: 6,
           runSpacing: 6,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
@@ -126,51 +126,55 @@ class _CardContent extends StatelessWidget {
               ),
           ],
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 9),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Text(
                 section.title,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: scheme.onSurface,
                       fontWeight: FontWeight.w900,
+                      height: 1.25,
                     ),
               ),
             ),
             IconButton(
               visualDensity: VisualDensity.compact,
+              constraints: const BoxConstraints(minWidth: 34, minHeight: 34),
+              padding: EdgeInsets.zero,
               tooltip: favorite ? 'Quitar de favoritos' : 'Agregar a favoritos',
               onPressed: onFavorite,
               icon: Icon(
                 favorite ? Icons.star_rounded : Icons.star_border_rounded,
+                size: 20,
                 color: favorite ? Colors.amber : scheme.onSurfaceVariant,
               ),
             ),
           ],
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 4),
         Text(
           section.description,
-          maxLines: 3,
+          maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             color: scheme.onSurfaceVariant,
-            fontSize: 12,
-            height: 1.5,
+            fontSize: 11,
+            height: 1.4,
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 9),
         Row(
           children: [
-            Icon(Icons.arrow_forward_rounded, size: 17, color: accent),
-            const SizedBox(width: 6),
+            Icon(Icons.arrow_forward_rounded, size: 15, color: accent),
+            const SizedBox(width: 5),
             Text(
               'Abrir lección',
               style: TextStyle(
                 color: accent,
-                fontSize: 12,
+                fontSize: 11,
                 fontWeight: FontWeight.w800,
               ),
             ),
@@ -192,7 +196,7 @@ class _Pill extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     final color = foreground ?? scheme.onSurfaceVariant;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
       decoration: BoxDecoration(
         color: color.withValues(alpha: .10),
         borderRadius: BorderRadius.circular(99),
@@ -202,7 +206,7 @@ class _Pill extends StatelessWidget {
         label,
         style: TextStyle(
           color: color,
-          fontSize: 10,
+          fontSize: 9,
           fontWeight: FontWeight.w800,
         ),
       ),
