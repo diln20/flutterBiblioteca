@@ -7,6 +7,7 @@ import '../models/course_section.dart';
 import '../models/lesson_content.dart';
 import '../services/library_controller.dart';
 import 'lesson_illustration.dart';
+import 'mobile_concept_preview.dart';
 
 class SectionDetail extends StatelessWidget {
   const SectionDetail({
@@ -67,6 +68,10 @@ class SectionDetail extends StatelessWidget {
                   ),
                 ],
               ),
+              if (MobileConceptPreview.supports(section.id)) ...[
+                const SizedBox(height: 24),
+                MobileConceptPreview(section: section),
+              ],
               const SizedBox(height: 28),
               _Panel(
                 icon: Icons.lightbulb_outline,
