@@ -1,0 +1,11 @@
+{
+  "name": "Biblioteca Flutter",
+  "short_name": "Flutter Biblioteca",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#07111F",
+  "theme_color": "#091426",
+  "description": "Ruta interactiva para aprender Dart y Flutter.",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false
+}
