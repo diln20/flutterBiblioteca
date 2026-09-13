@@ -1,12 +1,12 @@
 # Flutter Biblioteca
 
-Biblioteca interactiva para estudiar **Dart y Flutter** mediante una ruta progresiva, explicaciones, código de referencia, pasos guiados y retos.
+Biblioteca interactiva para estudiar **Dart y Flutter** mediante una ruta progresiva, explicaciones, código de referencia, pasos guiados, ejemplos, errores comunes, ejercicios y retos.
 
 La interfaz toma como referencia la biblioteca HTML original: conserva navegación por áreas, filtros, búsqueda, favoritos, progreso persistente y diseño responsive, pero está implementada completamente con widgets Flutter.
 
 ## Enfoque de aprendizaje
 
-La ruta ya no comienza directamente con widgets. Primero se completa una etapa de **Dart básico**, porque todos los conceptos posteriores de Flutter dependen del lenguaje.
+La ruta no comienza directamente con widgets. Primero se completa una etapa de **Dart básico**, porque todos los conceptos posteriores de Flutter dependen del lenguaje.
 
 ### Etapa 1 · Dart básico
 
@@ -34,7 +34,7 @@ La ruta ya no comienza directamente con widgets. Primero se completa una etapa d
 
 Después de la base de Dart, la ruta continúa con:
 
-- Introducción a Flutter.
+- Introducción a Flutter y árbol de widgets.
 - Widgets y layouts responsive.
 - Estado y reactividad.
 - Rutas y navegación.
@@ -43,8 +43,10 @@ Después de la base de Dart, la ruta continúa con:
 - Persistencia local.
 - Arquitectura por features.
 - Testing y análisis estático.
-- Rendimiento.
+- Rendimiento y reconstrucciones.
 - Accesibilidad y UX.
+
+Tanto las lecciones de Dart como las de Flutter cuentan con contenido extendido: **sintaxis esencial, conceptos clave, ejemplos explicados, errores comunes y ejercicios con pistas**, además del código integrador y el reto final de cada módulo.
 
 ## Funciones de la aplicación
 
@@ -55,10 +57,11 @@ Después de la base de Dart, la ruta continúa con:
 - Favoritos persistentes con `shared_preferences`.
 - Progreso persistente y restauración de la última sección abierta.
 - 30 módulos organizados por etapas.
-- Vista de detalle con explicación, pasos, código y reto.
+- Vista de detalle con explicación, sintaxis, ejemplos, errores comunes, ejercicios, código y reto.
 - Navegación anterior/siguiente entre módulos.
-- Pruebas del catálogo y análisis estático en GitHub Actions.
-- Entrada web preparada en `web/`.
+- Pruebas del catálogo y del contenido educativo.
+- Análisis estático y tests automáticos en GitHub Actions.
+- Build y despliegue de Flutter Web con GitHub Pages.
 
 ## Estructura
 
@@ -67,10 +70,13 @@ lib/
   data/
     catalog/
       dart_basics_catalog.dart
+      dart_lesson_content.dart
       flutter_catalog.dart
+      flutter_lesson_content.dart
     course_catalog.dart
   models/
     course_section.dart
+    lesson_content.dart
   screens/
     library_home_page.dart
   services/
@@ -80,12 +86,12 @@ lib/
     library_filters.dart
     library_sidebar.dart
     section_card.dart
-    section_detail.dart
+    section_detail_enriched.dart
   app.dart
   main.dart
 ```
 
-El archivo `course_catalog.dart` solo compone las etapas. El contenido de Dart y Flutter queda separado para que la biblioteca pueda crecer sin volver a crear un archivo monolítico.
+El archivo `course_catalog.dart` solo compone las etapas. El catálogo base y el contenido extendido están separados para que la biblioteca pueda crecer sin volver a crear archivos monolíticos.
 
 ## Ejecutar
 
@@ -107,4 +113,4 @@ flutter analyze
 flutter test
 ```
 
-GitHub Actions ejecuta ambas verificaciones en cada push a `main` y en cada pull request.
+GitHub Actions ejecuta ambas verificaciones en cada push a `main`. El workflow de Pages también genera el build web con el `base-href` correcto para `/flutterBiblioteca/` y publica el resultado.
