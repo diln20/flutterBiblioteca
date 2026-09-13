@@ -13,6 +13,7 @@ class LibraryController extends ChangeNotifier {
 
   String selectedId = courseCatalog.first.id;
   String group = 'Todos';
+  String level = 'Todos';
   String query = '';
   bool favoritesOnly = false;
   bool initialized = false;
@@ -20,6 +21,11 @@ class LibraryController extends ChangeNotifier {
   List<String> get groups => <String>[
         'Todos',
         ...{for (final section in courseCatalog) section.group},
+      ];
+
+  List<String> get levels => <String>[
+        'Todos',
+        ...{for (final section in courseCatalog) section.level},
       ];
 
   CourseSection get selected => courseCatalog.firstWhere(
@@ -31,6 +37,7 @@ class LibraryController extends ChangeNotifier {
     final normalized = query.trim().toLowerCase();
     return courseCatalog.where((section) {
       final matchesGroup = group == 'Todos' || section.group == group;
+      final matchesLevel = level == 'Todos' || section.level == level;
       final matchesFavorite = !favoritesOnly || favorites.contains(section.id);
       final haystack = <String>[
         section.title,
@@ -40,13 +47,16 @@ class LibraryController extends ChangeNotifier {
         ...section.keywords,
       ].join(' ').toLowerCase();
       final matchesQuery = normalized.isEmpty || haystack.contains(normalized);
-      return matchesGroup && matchesFavorite && matchesQuery;
+      return matchesGroup && matchesLevel && matchesFavorite && matchesQuery;
     }).toList();
   }
 
   int get total => courseCatalog.length;
 
-  double get progress => courseCatalog.isEmpty ? 0 : completed.length / courseCatalog.length;
+  int get remaining => total - completed.length;
+
+  double get progress =>
+      courseCatalog.isEmpty ? 0 : completed.length / courseCatalog.length;
 
   Future<void> initialize() async {
     final progress = await _store.load();
@@ -74,8 +84,21 @@ class LibraryController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setLevel(String value) {
+    level = value;
+    notifyListeners();
+  }
+
   void toggleFavoritesOnly() {
     favoritesOnly = !favoritesOnly;
+    notifyListeners();
+  }
+
+  void clearFilters() {
+    group = 'Todos';
+    level = 'Todos';
+    query = '';
+    favoritesOnly = false;
     notifyListeners();
   }
 
@@ -104,7 +127,9 @@ class LibraryController extends ChangeNotifier {
 
   CourseSection? nextOf(CourseSection current) {
     final index = courseCatalog.indexWhere((section) => section.id == current.id);
-    return index >= 0 && index < courseCatalog.length - 1 ? courseCatalog[index + 1] : null;
+    return index >= 0 && index < courseCatalog.length - 1
+        ? courseCatalog[index + 1]
+        : null;
   }
 
   Future<void> _persist() => _store.save(
