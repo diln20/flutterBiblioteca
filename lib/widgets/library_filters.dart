@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/library_controller.dart';
+import 'filter_label.dart';
 
 class LibraryFilters extends StatelessWidget {
   const LibraryFilters({
@@ -19,12 +20,15 @@ class LibraryFilters extends StatelessWidget {
         children: [
           TextField(
             onChanged: controller.setQuery,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: 'Buscar tema, categoria o concepto',
-              prefixIcon: Icon(Icons.search),
+              prefixIcon: const Icon(Icons.search),
+              helperText: '${controller.filtered.length} resultados visibles',
             ),
           ),
           const SizedBox(height: 10),
+          const FilterLabel(text: 'Categoria'),
+          const SizedBox(height: 6),
           SizedBox(
             height: 38,
             child: ListView.separated(
@@ -42,6 +46,8 @@ class LibraryFilters extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
+          const FilterLabel(text: 'Nivel'),
+          const SizedBox(height: 6),
           SizedBox(
             height: 38,
             child: ListView.separated(
