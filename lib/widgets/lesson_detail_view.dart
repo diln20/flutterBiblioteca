@@ -4,11 +4,12 @@ import '../models/course_section.dart';
 import '../services/library_controller.dart';
 import 'section_detail_enriched.dart';
 import 'widget_mobile_preview.dart';
+import 'widget_svg_gallery.dart';
 
-/// Compone la lección escrita con una representación real de la interfaz móvil.
+/// Compone la lección escrita con representaciones visuales de la interfaz.
 ///
-/// En escritorio mantiene el teléfono visible al lado del contenido. En móvil
-/// muestra una vista compacta arriba y permite ampliarla en un diálogo.
+/// Cada lección Flutter muestra una preview real construida con widgets y una
+/// galería SVG que explica cómo se ven los widgets concretos dentro de un móvil.
 class LessonDetailView extends StatelessWidget {
   const LessonDetailView({
     super.key,
@@ -55,6 +56,11 @@ class LessonDetailView extends StatelessWidget {
         return Column(
           children: [
             _CompactPreview(section: section),
+            if (WidgetSvgGallery.supports(section))
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+                child: WidgetSvgGallery(section: section, compact: true),
+              ),
             const Divider(height: 1),
             Expanded(
               child: SectionDetail(
@@ -138,13 +144,17 @@ class _DesktopPreview extends StatelessWidget {
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
-                      'No es una captura: esta pantalla está hecha con los mismos componentes que estudias en la lección.',
+                      'La preview superior es interactiva. Debajo tienes diagramas SVG que señalan cada widget dentro de una interfaz móvil.',
                       style: TextStyle(fontSize: 10.5, height: 1.4),
                     ),
                   ),
                 ],
               ),
             ),
+            if (WidgetSvgGallery.supports(section)) ...[
+              const SizedBox(height: 18),
+              WidgetSvgGallery(section: section),
+            ],
           ],
         ),
       ),
@@ -226,7 +236,7 @@ class _CompactPreview extends StatelessWidget {
         return Dialog(
           insetPadding: const EdgeInsets.all(18),
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 470, maxHeight: 820),
+            constraints: const BoxConstraints(maxWidth: 920, maxHeight: 860),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
               child: Column(
@@ -252,7 +262,33 @@ class _CompactPreview extends StatelessWidget {
                   Divider(color: scheme.outlineVariant),
                   Flexible(
                     child: SingleChildScrollView(
-                      child: WidgetMobilePreview(section: section),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          final wide = constraints.maxWidth >= 760;
+                          if (wide) {
+                            return Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: 350,
+                                  child: WidgetMobilePreview(section: section),
+                                ),
+                                const SizedBox(width: 18),
+                                Expanded(
+                                  child: WidgetSvgGallery(section: section),
+                                ),
+                              ],
+                            );
+                          }
+                          return Column(
+                            children: [
+                              WidgetMobilePreview(section: section),
+                              const SizedBox(height: 18),
+                              WidgetSvgGallery(section: section),
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
