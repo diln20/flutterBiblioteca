@@ -17,12 +17,28 @@ class LessonIllustration extends StatelessWidget {
     final group = section.group.toLowerCase();
     final id = section.id.toLowerCase();
 
+    if (id.contains('widget-lifecycle')) {
+      return 'assets/illustrations/widget-lifecycle.svg';
+    }
+    if (id.contains('lists-grids')) {
+      return 'assets/illustrations/layout-collections.svg';
+    }
+    if (id.contains('material3-theme')) {
+      return 'assets/illustrations/theme-material.svg';
+    }
+    if (id.contains('animations')) {
+      return 'assets/illustrations/animation-motion.svg';
+    }
+    if (id.contains('gestures-focus') || id.contains('feedback-overlays')) {
+      return 'assets/illustrations/interaction-feedback.svg';
+    }
     if (group.contains('proyecto')) {
       return 'assets/illustrations/project-build.svg';
     }
     if (group.contains('api') ||
         group.contains('datos') ||
-        id.contains('persistencia')) {
+        id.contains('persistencia') ||
+        id.contains('offline')) {
       return 'assets/illustrations/data-api.svg';
     }
     if (group.contains('estado') || id.contains('estado')) {
