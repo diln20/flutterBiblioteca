@@ -1,28 +1,22 @@
 import '../../models/course_section.dart';
 
-/// Primera etapa de la ruta: dominar Dart antes de comenzar con Flutter.
+/// Primera etapa: fundamentos del lenguaje antes de comenzar con Flutter.
 const dartBasicsCatalog = <CourseSection>[
   CourseSection(
     id: 'dart-01-introduccion',
     group: 'Dart básico',
     title: '01 · Qué es Dart y primer programa',
     level: 'Principiante',
-    description: 'Conoce Dart, la función main(), las sentencias, los bloques, los comentarios y print().',
-    whyItMatters: 'Flutter se programa con Dart. Primero hay que entender cómo se escribe y ejecuta el lenguaje.',
+    description: 'Conoce Dart, main(), sentencias, bloques, comentarios y print().',
+    whyItMatters: 'Flutter se programa con Dart; primero hay que comprender el lenguaje.',
     code: r"""void main() {
   // Comentario de una línea
   print('Hola, Dart');
 
-  /* Comentario de
-     varias líneas */
+  /* Comentario de varias líneas */
   print('Mi primer programa');
 }""",
-    steps: [
-      'Identifica main() como punto de entrada.',
-      'Usa print() para mostrar información.',
-      'Diferencia sentencias, bloques y comentarios.',
-      'Usa lowerCamelCase para variables y funciones.',
-    ],
+    steps: ['Identifica main() como punto de entrada.', 'Usa print() para mostrar datos.', 'Diferencia sentencias, bloques y comentarios.', 'Usa lowerCamelCase para variables y funciones.'],
     challenge: 'Imprime tu nombre, ciudad y tres tecnologías que quieras aprender.',
     keywords: ['dart', 'main', 'print', 'comentarios', 'sintaxis'],
     accentValue: 0xFF60A5FA,
@@ -32,27 +26,21 @@ const dartBasicsCatalog = <CourseSection>[
     group: 'Dart básico',
     title: '02 · Variables, final y const',
     level: 'Principiante',
-    description: 'Declara datos con tipos explícitos, var, final y const y aprende cuándo usar cada uno.',
-    whyItMatters: 'La declaración comunica si un dato puede cambiar y permite que Dart detecte errores temprano.',
+    description: 'Declara datos con tipos explícitos, var, final y const.',
+    whyItMatters: 'La declaración comunica si un dato puede cambiar y ayuda al compilador.',
     code: r"""void main() {
   String nombre = 'Ana';
   var edad = 20;
   double altura = 1.68;
-
   final fechaActual = DateTime.now();
   const pi = 3.141592;
 
   edad = 21;
-  print('$nombre tiene $edad años');
+  print('$nombre tiene $edad años y mide $altura m');
   print(fechaActual);
   print(pi);
 }""",
-    steps: [
-      'Declara variables con tipo explícito.',
-      'Usa var cuando el tipo sea evidente.',
-      'Usa final para un valor asignado una sola vez.',
-      'Usa const para constantes de tiempo de compilación.',
-    ],
+    steps: ['Declara variables con tipo explícito.', 'Usa var cuando el tipo sea evidente.', 'Usa final para asignación única.', 'Usa const para constantes de compilación.'],
     challenge: 'Declara nombre, precio, cantidad e IVA de un producto y calcula el subtotal.',
     keywords: ['variables', 'var', 'final', 'const', 'inferencia'],
     accentValue: 0xFF60A5FA,
@@ -78,12 +66,7 @@ const dartBasicsCatalog = <CourseSection>[
   print(dato);
   print(flexible);
 }""",
-    steps: [
-      'Usa int para enteros y double para decimales.',
-      'Usa num cuando aceptes int o double.',
-      'Representa texto con String y estados con bool.',
-      'Prefiere tipos concretos u Object antes que dynamic.',
-    ],
+    steps: ['Usa int para enteros y double para decimales.', 'Usa num si aceptas int o double.', 'Usa String para texto y bool para estados.', 'Prefiere tipos concretos antes que dynamic.'],
     challenge: 'Representa un estudiante con nombre, edad, promedio, estado activo y código.',
     keywords: ['int', 'double', 'num', 'string', 'bool', 'object', 'dynamic'],
     accentValue: 0xFF60A5FA,
@@ -93,12 +76,11 @@ const dartBasicsCatalog = <CourseSection>[
     group: 'Dart básico',
     title: '04 · Operadores',
     level: 'Principiante',
-    description: 'Practica operadores aritméticos, de asignación, comparación, lógicos e incremento.',
-    whyItMatters: 'Los operadores forman expresiones para calcular, comparar y decidir.',
+    description: 'Practica operadores aritméticos, comparación, asignación, lógicos y ternarios.',
+    whyItMatters: 'Los operadores permiten calcular, comparar y construir condiciones.',
     code: r"""void main() {
   var a = 10;
   var b = 3;
-
   print(a + b);
   print(a - b);
   print(a * b);
@@ -106,19 +88,11 @@ const dartBasicsCatalog = <CourseSection>[
   print(a ~/ b);
   print(a % b);
 
-  final esMayor = a > b;
   final cumple = a >= 10 && b != 0;
   final mensaje = cumple ? 'Válido' : 'No válido';
-
-  print(esMayor);
   print(mensaje);
 }""",
-    steps: [
-      'Usa +, -, *, /, ~/ y %.',
-      'Compara con ==, !=, >, <, >= y <=.',
-      'Combina condiciones con &&, || y !.',
-      'Usa el operador ternario para decisiones pequeñas.',
-    ],
+    steps: ['Usa +, -, *, /, ~/ y %.', 'Compara con ==, !=, >, <, >= y <=.', 'Combina con &&, || y !.', 'Usa el ternario para decisiones pequeñas.'],
     challenge: 'Determina si una persona puede entrar a un evento según edad y entrada válida.',
     keywords: ['operadores', 'aritmetica', 'comparacion', 'logicos', 'ternario'],
     accentValue: 0xFF60A5FA,
@@ -128,7 +102,7 @@ const dartBasicsCatalog = <CourseSection>[
     group: 'Dart básico',
     title: '05 · Strings e interpolación',
     level: 'Principiante',
-    description: 'Aprende comillas, interpolación, texto multilínea, raw strings y métodos comunes.',
+    description: 'Aprende comillas, interpolación, saltos de línea, raw strings y métodos comunes.',
     whyItMatters: 'Las apps muestran, reciben, buscan y transforman texto constantemente.',
     code: r"""void main() {
   const nombre = 'Laura';
@@ -143,13 +117,8 @@ const dartBasicsCatalog = <CourseSection>[
   print(nombre.toUpperCase());
   print(mensaje.contains('Dart'));
 }""",
-    steps: [
-      'Crea String con comillas simples o dobles.',
-      'Interpola con $variable y ${expresion}.',
-      'Representa saltos de línea con \n cuando corresponda.',
-      'Practica trim(), contains(), toUpperCase() y split().',
-    ],
-    challenge: 'Construye una ficha de usuario con nombre, edad, profesión y ciudad usando interpolación.',
+    steps: ['Crea String con comillas simples o dobles.', r'Interpola con $variable y ${expresion}.', r'Usa \n para un salto de línea.', 'Practica trim(), contains(), toUpperCase() y split().'],
+    challenge: 'Construye una ficha de usuario con nombre, edad, profesión y ciudad.',
     keywords: ['string', 'interpolacion', 'texto', 'metodos'],
     accentValue: 0xFF60A5FA,
   ),
@@ -158,8 +127,8 @@ const dartBasicsCatalog = <CourseSection>[
     group: 'Dart básico',
     title: '06 · Conversión de tipos y entrada por consola',
     level: 'Principiante',
-    description: 'Convierte texto a números con parse y tryParse, y conoce stdin en programas de consola.',
-    whyItMatters: 'La entrada externa suele ser texto y debe validarse antes de usarla.',
+    description: 'Convierte texto con parse, tryParse y toString y conoce stdin para consola.',
+    whyItMatters: 'La entrada externa suele llegar como texto y debe validarse.',
     code: r"""import 'dart:io';
 
 void main() {
@@ -173,25 +142,19 @@ void main() {
   }
 
   print('El próximo año tendrás ${edad + 1} años');
-  print(edad.toString());
 }""",
-    steps: [
-      'Usa int.parse() o double.parse() si el formato está garantizado.',
-      'Usa tryParse() cuando la entrada pueda ser inválida.',
-      'Convierte valores a texto con toString().',
-      'Usa stdin.readLineSync() solo en programas Dart de consola.',
-    ],
-    challenge: 'Pide dos números, valida ambos y muestra suma, resta, multiplicación y división.',
+    steps: ['Usa parse() si el formato está garantizado.', 'Usa tryParse() para entradas inciertas.', 'Convierte a texto con toString().', 'Usa stdin.readLineSync() en programas de consola.'],
+    challenge: 'Pide dos números, valídalos y muestra las cuatro operaciones básicas.',
     keywords: ['parse', 'tryparse', 'tostring', 'stdin', 'conversion'],
     accentValue: 0xFF60A5FA,
   ),
   CourseSection(
     id: 'dart-07-condicionales',
     group: 'Dart básico',
-    title: '07 · Condicionales: if, else if y else',
+    title: '07 · if, else if y else',
     level: 'Principiante',
-    description: 'Decide qué código se ejecuta usando condiciones simples y compuestas.',
-    whyItMatters: 'Las apps validan permisos, formularios, estados y reglas de negocio con condiciones.',
+    description: 'Controla qué código se ejecuta según una o varias condiciones.',
+    whyItMatters: 'Las apps toman decisiones para permisos, formularios y reglas de negocio.',
     code: r"""void main() {
   const nota = 4.2;
 
@@ -203,13 +166,8 @@ void main() {
     print('Reprobado');
   }
 }""",
-    steps: [
-      'Escribe condiciones booleanas en if.',
-      'Añade alternativas con else if.',
-      'Usa else para el caso restante.',
-      'Combina condiciones sin anidamiento innecesario.',
-    ],
-    challenge: 'Clasifica una compra como pequeña, mediana o grande y aplica un descuento distinto.',
+    steps: ['Escribe una condición booleana en if.', 'Añade alternativas con else if.', 'Usa else para el caso restante.', 'Evita anidamiento innecesario.'],
+    challenge: 'Clasifica una compra por valor y aplica descuentos distintos.',
     keywords: ['if', 'else', 'else if', 'condicionales'],
     accentValue: 0xFF34D399,
   ),
@@ -218,8 +176,8 @@ void main() {
     group: 'Dart básico',
     title: '08 · switch y enum',
     level: 'Principiante',
-    description: 'Modela opciones conocidas con enum y decide entre casos mediante switch.',
-    whyItMatters: 'Los estados cerrados son más seguros como enum que como cadenas de texto libres.',
+    description: 'Representa opciones conocidas con enum y decide entre casos con switch.',
+    whyItMatters: 'Los estados cerrados son más seguros como enum que como texto libre.',
     code: r"""enum EstadoPedido { creado, enviado, entregado, cancelado }
 
 void main() {
@@ -236,23 +194,18 @@ void main() {
       print('Pedido cancelado');
   }
 }""",
-    steps: [
-      'Crea un enum para un conjunto cerrado.',
-      'Evalúa el valor con switch.',
-      'Cubre todos los casos.',
-      'Evita cadenas mágicas para estados conocidos.',
-    ],
-    challenge: 'Crea DiaSemana y usa switch para indicar si es laboral o fin de semana.',
+    steps: ['Crea un enum para un conjunto cerrado.', 'Evalúa el valor con switch.', 'Cubre todos los casos.', 'Evita cadenas mágicas para estados.'],
+    challenge: 'Crea DiaSemana y determina si es laboral o fin de semana.',
     keywords: ['switch', 'enum', 'case', 'estados'],
     accentValue: 0xFF34D399,
   ),
   CourseSection(
     id: 'dart-09-bucles',
     group: 'Dart básico',
-    title: '09 · Bucles: for, for-in, while y do-while',
+    title: '09 · for, for-in, while y do-while',
     level: 'Principiante',
     description: 'Repite tareas y controla iteraciones con break y continue.',
-    whyItMatters: 'Recorrer colecciones y repetir validaciones es parte del trabajo diario con datos.',
+    whyItMatters: 'Recorrer colecciones y repetir validaciones es trabajo cotidiano.',
     code: r"""void main() {
   final cursos = ['Dart', 'Flutter', 'Git'];
 
@@ -271,12 +224,7 @@ void main() {
     contador--;
   }
 }""",
-    steps: [
-      'Usa for cuando necesites un índice.',
-      'Usa for-in para recorrer elementos.',
-      'Usa while o do-while cuando dependa de una condición.',
-      'Usa break para salir y continue para saltar.',
-    ],
+    steps: ['Usa for cuando necesites índice.', 'Usa for-in para elementos.', 'Usa while o do-while según la condición.', 'Usa break y continue para controlar el ciclo.'],
     challenge: 'Recorre del 1 al 100 y muestra solo los múltiplos de 3.',
     keywords: ['for', 'for-in', 'while', 'do-while', 'break', 'continue'],
     accentValue: 0xFF34D399,
@@ -284,16 +232,15 @@ void main() {
   CourseSection(
     id: 'dart-10-colecciones',
     group: 'Dart básico',
-    title: '10 · Colecciones: List, Set y Map',
+    title: '10 · List, Set y Map',
     level: 'Principiante',
-    description: 'Guarda secuencias con List, valores únicos con Set y pares clave-valor con Map.',
-    whyItMatters: 'Usuarios, productos, cursos y respuestas de APIs se representan mediante colecciones.',
+    description: 'Usa List para secuencias, Set para únicos y Map para clave-valor.',
+    whyItMatters: 'La mayoría de datos de una app se manipulan como colecciones.',
     code: r"""void main() {
   final nombres = <String>['Ana', 'Luis'];
   nombres.add('Marta');
 
   final etiquetas = <String>{'dart', 'flutter', 'dart'};
-
   final usuario = <String, Object>{
     'nombre': 'Ana',
     'edad': 22,
@@ -304,13 +251,8 @@ void main() {
   print(etiquetas);
   print(usuario['nombre']);
 }""",
-    steps: [
-      'Usa List cuando importe el orden.',
-      'Usa Set para valores únicos.',
-      'Usa Map para relacionar claves con valores.',
-      'Practica add, remove, contains, where y map.',
-    ],
-    challenge: 'Crea una lista de productos, un Set de categorías y un Map para un producto seleccionado.',
+    steps: ['Usa List cuando importe el orden.', 'Usa Set para valores únicos.', 'Usa Map para relacionar claves y valores.', 'Practica add, remove, contains, where y map.'],
+    challenge: 'Crea productos en una List, categorías en un Set y un producto en un Map.',
     keywords: ['list', 'set', 'map', 'colecciones'],
     accentValue: 0xFF2DD4BF,
   ),
@@ -319,8 +261,8 @@ void main() {
     group: 'Dart básico',
     title: '11 · Funciones y parámetros',
     level: 'Principiante',
-    description: 'Crea funciones con retorno, parámetros posicionales, nombrados, opcionales y valores por defecto.',
-    whyItMatters: 'Funciones pequeñas eliminan repetición y permiten probar la lógica de forma independiente.',
+    description: 'Crea funciones con retorno, parámetros posicionales, nombrados y valores por defecto.',
+    whyItMatters: 'Funciones pequeñas reducen repetición y facilitan pruebas.',
     code: r"""double calcularTotal(
   double precio, {
   int cantidad = 1,
@@ -337,13 +279,8 @@ void main() {
   final total = calcularTotal(25, cantidad: 3, descuento: 5);
   print(formatearPrecio(total));
 }""",
-    steps: [
-      'Define el tipo de retorno.',
-      'Usa parámetros nombrados para mejorar legibilidad.',
-      'Añade valores por defecto cuando tenga sentido.',
-      'Usa => para una sola expresión.',
-    ],
-    challenge: 'Crea funciones separadas para subtotal, impuesto y total de una factura.',
+    steps: ['Define el tipo de retorno.', 'Usa parámetros nombrados.', 'Añade valores por defecto.', 'Usa => para una sola expresión.'],
+    challenge: 'Separa subtotal, impuesto y total de una factura en funciones.',
     keywords: ['funciones', 'parametros', 'return', 'named parameters'],
     accentValue: 0xFF2DD4BF,
   ),
@@ -352,26 +289,19 @@ void main() {
     group: 'Dart básico',
     title: '12 · Scope, callbacks y funciones anónimas',
     level: 'Principiante',
-    description: 'Comprende el alcance de variables y pasa funciones como argumentos usando callbacks.',
-    whyItMatters: 'Flutter usa callbacks constantemente para botones, formularios, listas y eventos.',
+    description: 'Comprende el alcance de variables y pasa funciones como argumentos.',
+    whyItMatters: 'Flutter usa callbacks constantemente en eventos y widgets.',
     code: r"""void main() {
   const minimo = 3;
   final numeros = [1, 2, 3, 4, 5];
 
-  final filtrados = numeros.where((numero) {
-    return numero >= minimo;
-  }).toList();
-
+  final filtrados = numeros.where((numero) => numero >= minimo).toList();
   final dobles = filtrados.map((numero) => numero * 2).toList();
+
   print(dobles);
 }""",
-    steps: [
-      'Distingue variables locales y externas.',
-      'Pasa funciones como argumentos.',
-      'Escribe funciones anónimas.',
-      'Practica where(), map() y forEach().',
-    ],
-    challenge: 'Filtra notas aprobadas y transforma cada una a un texto descriptivo.',
+    steps: ['Distingue scope local y externo.', 'Pasa funciones como argumentos.', 'Escribe funciones anónimas.', 'Practica where(), map() y forEach().'],
+    challenge: 'Filtra notas aprobadas y conviértelas a textos descriptivos.',
     keywords: ['scope', 'callback', 'funcion anonima', 'where', 'map'],
     accentValue: 0xFF2DD4BF,
   ),
@@ -381,7 +311,7 @@ void main() {
     title: '13 · Null safety',
     level: 'Principiante',
     description: 'Diferencia tipos no-null y nullable y usa ?, ??, ??=, ?. y !.',
-    whyItMatters: 'Null safety evita fallos comunes al trabajar con formularios, red, navegación y datos opcionales.',
+    whyItMatters: 'Null safety evita fallos comunes con datos opcionales.',
     code: r"""void main() {
   String nombre = 'Dart';
   String? apodo;
@@ -393,13 +323,8 @@ void main() {
   apodo ??= 'Sin apodo';
   print(apodo);
 }""",
-    steps: [
-      'Usa Tipo? solo si null es válido.',
-      'Proporciona alternativas con ??.',
-      'Accede de forma segura con ?..',
-      'Evita ! salvo que puedas garantizar el valor.',
-    ],
-    challenge: 'Crea un perfil con segundoNombre y teléfono opcionales y valores alternativos.',
+    steps: ['Usa Tipo? solo si null es válido.', 'Proporciona alternativas con ??.', 'Accede de forma segura con ?..', 'Evita ! salvo que puedas garantizar el valor.'],
+    challenge: 'Modela un perfil con segundo nombre y teléfono opcionales.',
     keywords: ['null safety', 'nullable', 'null', '??', '?.'],
     accentValue: 0xFFA78BFA,
   ),
@@ -409,7 +334,7 @@ void main() {
     title: '14 · Clases, objetos y constructores',
     level: 'Principiante',
     description: 'Modela datos con clases, propiedades, constructores, métodos y getters.',
-    whyItMatters: 'Los modelos tipados son la base para representar datos de una app Flutter.',
+    whyItMatters: 'Los modelos tipados serán la base de los datos en Flutter.',
     code: r"""class Libro {
   final String titulo;
   final String autor;
@@ -423,9 +348,7 @@ void main() {
 
   String get estado => prestado ? 'Prestado' : 'Disponible';
 
-  void prestar() {
-    prestado = true;
-  }
+  void prestar() => prestado = true;
 }
 
 void main() {
@@ -433,13 +356,8 @@ void main() {
   libro.prestar();
   print(libro.estado);
 }""",
-    steps: [
-      'Define propiedades con tipos concretos.',
-      'Inicializa objetos con constructores.',
-      'Usa required para datos obligatorios.',
-      'Añade métodos y getters al modelo correcto.',
-    ],
-    challenge: 'Crea CuentaBancaria con titular, saldo, depositar(), retirar() y un getter de fondos.',
+    steps: ['Define propiedades tipadas.', 'Inicializa con constructores.', 'Usa required para datos obligatorios.', 'Añade métodos y getters al modelo.'],
+    challenge: 'Crea CuentaBancaria con depositar(), retirar() y un getter de fondos.',
     keywords: ['clases', 'objetos', 'constructor', 'required', 'getter'],
     accentValue: 0xFFA78BFA,
   ),
@@ -448,8 +366,8 @@ void main() {
     group: 'Dart básico',
     title: '15 · POO: abstracción, herencia, interfaces y mixins',
     level: 'Intermedio',
-    description: 'Conoce abstract, extends, implements, @override y mixins para reutilizar y especializar comportamiento.',
-    whyItMatters: 'Estas herramientas aparecen al leer APIs de Dart y Flutter y al diseñar modelos extensibles.',
+    description: 'Conoce abstract, extends, implements, @override y mixins.',
+    whyItMatters: 'Estas herramientas aparecen en APIs de Dart y Flutter.',
     code: r"""abstract class Notificable {
   void enviar();
 }
@@ -464,19 +382,9 @@ class NotificacionEmail with ConRegistro implements Notificable {
     registrar('Enviando correo');
     print('Correo enviado');
   }
-}
-
-void main() {
-  final servicio = NotificacionEmail();
-  servicio.enviar();
 }""",
-    steps: [
-      'Usa abstract para contratos incompletos.',
-      'Sobrescribe comportamiento con @override.',
-      'Usa implements para cumplir una interfaz.',
-      'Usa mixins para compartir comportamiento.',
-    ],
-    challenge: 'Crea una interfaz Exportable y dos implementaciones: ReportePdf y ReporteCsv.',
+    steps: ['Usa abstract para contratos incompletos.', 'Sobrescribe con @override.', 'Usa implements para una interfaz.', 'Usa mixins para compartir comportamiento.'],
+    challenge: 'Crea Exportable con implementaciones ReportePdf y ReporteCsv.',
     keywords: ['poo', 'herencia', 'implements', 'abstract', 'mixin'],
     accentValue: 0xFFA78BFA,
   ),
@@ -485,12 +393,10 @@ void main() {
     group: 'Dart básico',
     title: '16 · Errores y excepciones',
     level: 'Principiante',
-    description: 'Controla situaciones excepcionales con try, catch, on, finally y throw.',
-    whyItMatters: 'Entradas, archivos, red y servicios pueden fallar y la app debe reaccionar de manera controlada.',
+    description: 'Controla errores con try, catch, on, finally y throw.',
+    whyItMatters: 'Entradas, archivos y servicios pueden fallar de forma esperable.',
     code: r"""double dividir(double a, double b) {
-  if (b == 0) {
-    throw ArgumentError('El divisor no puede ser cero');
-  }
+  if (b == 0) throw ArgumentError('El divisor no puede ser cero');
   return a / b;
 }
 
@@ -505,13 +411,8 @@ void main() {
     print('Proceso finalizado');
   }
 }""",
-    steps: [
-      'Usa throw cuando una función no pueda cumplir su contrato.',
-      'Captura errores esperados de forma específica.',
-      'Usa catch para inspeccionar el error.',
-      'Usa finally para limpieza obligatoria.',
-    ],
-    challenge: 'Crea retirar(saldo, valor) y lanza una excepción ante valores inválidos.',
+    steps: ['Usa throw cuando no puedas cumplir un contrato.', 'Captura errores específicos con on.', 'Inspecciona el error con catch.', 'Usa finally para limpieza obligatoria.'],
+    challenge: 'Crea retirar(saldo, valor) y lanza errores para operaciones inválidas.',
     keywords: ['try', 'catch', 'throw', 'finally', 'exception'],
     accentValue: 0xFFF97316,
   ),
@@ -521,7 +422,7 @@ void main() {
     title: '17 · Future, async y await',
     level: 'Intermedio',
     description: 'Introduce operaciones asíncronas con Future, async y await.',
-    whyItMatters: 'Flutter usa asincronía para HTTP, almacenamiento, archivos y APIs de plataforma.',
+    whyItMatters: 'Flutter usa asincronía para red, almacenamiento y APIs de plataforma.',
     code: r"""Future<String> cargarUsuario() async {
   await Future.delayed(const Duration(milliseconds: 500));
   return 'Laura';
@@ -529,21 +430,11 @@ void main() {
 
 Future<void> main() async {
   print('Cargando...');
-
-  try {
-    final usuario = await cargarUsuario();
-    print('Usuario: $usuario');
-  } catch (error) {
-    print('No se pudo cargar: $error');
-  }
+  final usuario = await cargarUsuario();
+  print('Usuario: $usuario');
 }""",
-    steps: [
-      'Interpreta Future<T> como un valor futuro.',
-      'Marca con async una función que necesite await.',
-      'Espera resultados con await.',
-      'Maneja errores de operaciones asíncronas.',
-    ],
-    challenge: 'Simula la carga de libros con Future.delayed y muestra estados antes y después.',
+    steps: ['Interpreta Future<T> como un valor futuro.', 'Marca funciones asíncronas con async.', 'Espera resultados con await.', 'Maneja errores asíncronos con try/catch.'],
+    challenge: 'Simula la carga de una lista de libros con Future.delayed.',
     keywords: ['future', 'async', 'await', 'asincronia'],
     accentValue: 0xFF22D3EE,
   ),
@@ -552,8 +443,8 @@ Future<void> main() async {
     group: 'Dart básico',
     title: '18 · Archivos, imports y paquetes',
     level: 'Principiante',
-    description: 'Divide el programa en archivos y entiende import, pubspec.yaml y dart pub.',
-    whyItMatters: 'Un proyecto real no debe vivir en un único archivo y Flutter depende de esta organización.',
+    description: 'Divide programas en archivos y conoce import, pubspec.yaml y dart pub.',
+    whyItMatters: 'Un proyecto real necesita módulos y dependencias bien organizadas.',
     code: r"""// lib/modelo/libro.dart
 class Libro {
   final String titulo;
@@ -567,12 +458,7 @@ void main() {
   const libro = Libro('Dart organizado');
   print(libro.titulo);
 }""",
-    steps: [
-      'Mueve clases a archivos separados.',
-      'Importa solo las dependencias necesarias.',
-      'Reconoce pubspec.yaml como manifiesto.',
-      'Usa dart pub get para descargar dependencias.',
-    ],
+    steps: ['Mueve clases a archivos separados.', 'Importa solo lo necesario.', 'Reconoce pubspec.yaml como manifiesto.', 'Usa dart pub get para dependencias.'],
     challenge: 'Separa una app en main.dart, models/libro.dart y services/biblioteca_service.dart.',
     keywords: ['import', 'archivos', 'paquetes', 'pubspec', 'dart pub'],
     accentValue: 0xFFFACC15,
@@ -582,8 +468,8 @@ void main() {
     group: 'Dart básico',
     title: '19 · Proyecto: biblioteca de consola',
     level: 'Principiante',
-    description: 'Integra variables, colecciones, funciones, control de flujo, clases, null safety y errores en un proyecto de consola.',
-    whyItMatters: 'Un proyecto integrador confirma que la base de Dart está lista antes de empezar con widgets y Flutter.',
+    description: 'Integra variables, colecciones, funciones, control de flujo, clases, null safety y errores.',
+    whyItMatters: 'El proyecto confirma que ya existe una base sólida antes de comenzar Flutter.',
     code: r"""class Libro {
   final int id;
   final String titulo;
@@ -599,19 +485,12 @@ void main() {
   ];
 
   final disponibles = libros.where((libro) => !libro.prestado);
-
   for (final libro in disponibles) {
     print('${libro.id} - ${libro.titulo}');
   }
 }""",
-    steps: [
-      'Modela Libro y Usuario con clases.',
-      'Guarda objetos en colecciones tipadas.',
-      'Crea funciones para listar, buscar, prestar y devolver.',
-      'Añade un menú con switch dentro de un while.',
-      'Valida entradas y maneja errores.',
-    ],
-    challenge: 'Completa una biblioteca de consola con listar, buscar, agregar, prestar, devolver y salir, dividida en varios archivos.',
+    steps: ['Modela Libro y Usuario con clases.', 'Guarda objetos en colecciones tipadas.', 'Crea funciones para listar, buscar, prestar y devolver.', 'Añade un menú con switch dentro de while.', 'Valida entradas y maneja errores.'],
+    challenge: 'Completa una biblioteca de consola con listar, buscar, agregar, prestar, devolver y salir.',
     keywords: ['proyecto', 'biblioteca', 'dart', 'integracion', 'consola'],
     accentValue: 0xFFFB7185,
   ),
