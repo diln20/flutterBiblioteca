@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#111827"/><stop offset="1" stop-color="#2A1438"/></linearGradient></defs>
+  <rect width="720" height="420" rx="32" fill="url(#bg)"/>
+  <rect x="58" y="62" width="250" height="296" rx="26" fill="#0B1220" stroke="#475569" stroke-width="2"/>
+  <text x="183" y="98" text-anchor="middle" fill="#F8FAFC" font-family="Arial" font-size="16" font-weight="700">ListView.builder</text>
+  <g fill="#182235" stroke="#E879F9" stroke-width="2">
+    <rect x="84" y="126" width="198" height="48" rx="14"/>
+    <rect x="84" y="190" width="198" height="48" rx="14"/>
+    <rect x="84" y="254" width="198" height="48" rx="14"/>
+  </g>
+  <g fill="#E879F9"><circle cx="108" cy="150" r="8"/><circle cx="108" cy="214" r="8"/><circle cx="108" cy="278" r="8"/></g>
+  <g stroke="#64748B" stroke-width="8" stroke-linecap="round"><path d="M132 150h112"/><path d="M132 214h86"/><path d="M132 278h104"/></g>
+  <path d="M338 210h48" stroke="#A78BFA" stroke-width="4" stroke-linecap="round"/><path d="M373 197l16 13-16 13" fill="none" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="414" y="62" width="248" height="296" rx="26" fill="#0B1220" stroke="#475569" stroke-width="2"/>
+  <text x="538" y="98" text-anchor="middle" fill="#F8FAFC" font-family="Arial" font-size="16" font-weight="700">Responsive Grid</text>
+  <g fill="#1F1630" stroke="#C084FC" stroke-width="2">
+    <rect x="444" y="126" width="82" height="82" rx="16"/>
+    <rect x="550" y="126" width="82" height="82" rx="16"/>
+    <rect x="444" y="232" width="82" height="82" rx="16"/>
+    <rect x="550" y="232" width="82" height="82" rx="16"/>
+  </g>
+  <g fill="#C084FC" opacity=".8"><rect x="460" y="144" width="50" height="8" rx="4"/><rect x="566" y="144" width="50" height="8" rx="4"/><rect x="460" y="250" width="50" height="8" rx="4"/><rect x="566" y="250" width="50" height="8" rx="4"/></g>
+</svg>
