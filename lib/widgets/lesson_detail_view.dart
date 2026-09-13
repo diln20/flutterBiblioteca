@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import '../models/course_section.dart';
 import '../services/library_controller.dart';
 import 'guided_project_panel.dart';
+import 'lesson_visual_poster.dart';
 import 'section_detail_enriched.dart';
 import 'widget_mobile_preview.dart';
-import 'widget_svg_gallery.dart';
 
-/// Compone la lección escrita con representaciones visuales y una práctica
-/// incremental sobre la misma aplicación: "Mi Biblioteca".
+/// Compone cada lección Flutter con tres capas:
+/// 1. imagen representativa del concepto,
+/// 2. preview real de la interfaz móvil,
+/// 3. práctica incremental sobre la app "Mi Biblioteca".
 class LessonDetailView extends StatelessWidget {
   const LessonDetailView({
     super.key,
@@ -23,7 +25,11 @@ class LessonDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!WidgetMobilePreview.supports(section)) {
+    final hasVisual = LessonVisualPoster.supports(section);
+    final hasPreview = WidgetMobilePreview.supports(section);
+    final hasProject = GuidedProjectPanel.supports(section);
+
+    if (!hasVisual && !hasPreview && !hasProject) {
       return SectionDetail(
         section: section,
         controller: controller,
@@ -37,8 +43,8 @@ class LessonDetailView extends StatelessWidget {
           return Row(
             children: [
               SizedBox(
-                width: 420,
-                child: _DesktopPreview(section: section),
+                width: 440,
+                child: _DesktopLearningRail(section: section),
               ),
               const VerticalDivider(width: 1),
               Expanded(
@@ -54,14 +60,13 @@ class LessonDetailView extends StatelessWidget {
 
         return Column(
           children: [
-            _CompactPreview(section: section),
-            if (WidgetSvgGallery.supports(section))
+            if (hasVisual)
               Padding(
-                padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-                child: WidgetSvgGallery(section: section, compact: true),
+                padding: const EdgeInsets.fromLTRB(12, 12, 12, 10),
+                child: LessonVisualPoster(section: section),
               ),
-            if (GuidedProjectPanel.supports(section))
-              _CompactProjectStep(section: section),
+            if (hasPreview) _CompactPreview(section: section),
+            if (hasProject) _CompactProjectStep(section: section),
             const Divider(height: 1),
             Expanded(
               child: SectionDetail(
@@ -77,8 +82,8 @@ class LessonDetailView extends StatelessWidget {
   }
 }
 
-class _DesktopPreview extends StatelessWidget {
-  const _DesktopPreview({required this.section});
+class _DesktopLearningRail extends StatelessWidget {
+  const _DesktopLearningRail({required this.section});
 
   final CourseSection section;
 
@@ -90,20 +95,20 @@ class _DesktopPreview extends StatelessWidget {
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
       child: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(22, 24, 22, 30),
+        padding: const EdgeInsets.fromLTRB(18, 20, 18, 28),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
               children: [
                 Container(
-                  width: 36,
-                  height: 36,
+                  width: 38,
+                  height: 38,
                   decoration: BoxDecoration(
                     color: accent.withValues(alpha: .12),
                     borderRadius: BorderRadius.circular(11),
                   ),
-                  child: Icon(Icons.phone_iphone_rounded, color: accent),
+                  child: Icon(Icons.school_rounded, color: accent),
                 ),
                 const SizedBox(width: 10),
                 const Expanded(
@@ -111,50 +116,37 @@ class _DesktopPreview extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'ASÍ SE VE EN UN MÓVIL',
+                        'APRENDE VIENDO Y CONSTRUYENDO',
                         style: TextStyle(
-                          fontSize: 11,
+                          fontSize: 10.5,
                           fontWeight: FontWeight.w900,
-                          letterSpacing: .9,
+                          letterSpacing: .75,
                         ),
                       ),
                       SizedBox(height: 2),
                       Text(
-                        'Interfaz construida con widgets reales de Flutter',
-                        style: TextStyle(fontSize: 10),
+                        'Imagen · preview móvil · práctica guiada',
+                        style: TextStyle(fontSize: 10.5),
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 18),
-            WidgetMobilePreview(section: section),
-            const SizedBox(height: 16),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: accent.withValues(alpha: .07),
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: accent.withValues(alpha: .18)),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Icon(Icons.code_rounded, size: 17, color: accent),
-                  const SizedBox(width: 8),
-                  const Expanded(
-                    child: Text(
-                      'La preview superior es interactiva. Debajo tienes diagramas SVG que señalan cada widget y el paso práctico para continuar la misma aplicación.',
-                      style: TextStyle(fontSize: 10.5, height: 1.4),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            if (WidgetSvgGallery.supports(section)) ...[
+            if (LessonVisualPoster.supports(section)) ...[
+              const SizedBox(height: 16),
+              LessonVisualPoster(section: section),
+            ],
+            if (WidgetMobilePreview.supports(section)) ...[
               const SizedBox(height: 18),
-              WidgetSvgGallery(section: section),
+              _SectionLabel(
+                icon: Icons.phone_iphone_rounded,
+                title: 'Preview real en móvil',
+                subtitle: 'Construido con widgets reales de Flutter.',
+                accent: accent,
+              ),
+              const SizedBox(height: 12),
+              WidgetMobilePreview(section: section),
             ],
             if (GuidedProjectPanel.supports(section)) ...[
               const SizedBox(height: 18),
@@ -163,6 +155,56 @@ class _DesktopPreview extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _SectionLabel extends StatelessWidget {
+  const _SectionLabel({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.accent,
+  });
+
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, color: accent, size: 20),
+        const SizedBox(width: 9),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(height: 3),
+              Text(
+                subtitle,
+                style: TextStyle(
+                  color: scheme.onSurfaceVariant,
+                  fontSize: 10.5,
+                  height: 1.35,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -180,7 +222,10 @@ class _CompactProjectStep extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
       child: Material(
-        color: Color.alphaBlend(accent.withValues(alpha: .07), scheme.surface),
+        color: Color.alphaBlend(
+          accent.withValues(alpha: .07),
+          scheme.surface,
+        ),
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
@@ -200,7 +245,11 @@ class _CompactProjectStep extends StatelessWidget {
                     color: accent.withValues(alpha: .12),
                     borderRadius: BorderRadius.circular(11),
                   ),
-                  child: Icon(Icons.construction_rounded, color: accent, size: 20),
+                  child: Icon(
+                    Icons.construction_rounded,
+                    color: accent,
+                    size: 20,
+                  ),
                 ),
                 const SizedBox(width: 11),
                 const Expanded(
@@ -209,11 +258,14 @@ class _CompactProjectStep extends StatelessWidget {
                     children: [
                       Text(
                         'Continúa construyendo Mi Biblioteca',
-                        style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w900),
+                        style: TextStyle(
+                          fontSize: 12.5,
+                          fontWeight: FontWeight.w900,
+                        ),
                       ),
                       SizedBox(height: 3),
                       Text(
-                        'Archivos a crear/modificar, tareas y resultado esperado de esta lección.',
+                        'Archivos, tareas y resultado esperado de esta etapa.',
                         style: TextStyle(fontSize: 10.5, height: 1.35),
                       ),
                     ],
@@ -259,7 +311,7 @@ class _CompactPreview extends StatelessWidget {
 
     return Container(
       color: scheme.surface,
-      padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
+      padding: const EdgeInsets.fromLTRB(14, 10, 14, 12),
       child: Row(
         children: [
           Expanded(
@@ -267,7 +319,7 @@ class _CompactPreview extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Vista en móvil',
+                  'Preview real en móvil',
                   style: TextStyle(
                     color: accent,
                     fontSize: 12,
@@ -276,7 +328,7 @@ class _CompactPreview extends StatelessWidget {
                 ),
                 const SizedBox(height: 3),
                 Text(
-                  'Ejemplo real de ${section.title}',
+                  'Mira cómo se comporta ${section.title} dentro de una app.',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -290,8 +342,8 @@ class _CompactPreview extends StatelessWidget {
           ),
           const SizedBox(width: 12),
           SizedBox(
-            width: 76,
-            height: 118,
+            width: 70,
+            height: 108,
             child: FittedBox(
               fit: BoxFit.contain,
               child: SizedBox(
@@ -303,7 +355,7 @@ class _CompactPreview extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           IconButton.filledTonal(
-            tooltip: 'Ampliar vista móvil',
+            tooltip: 'Ampliar material visual',
             onPressed: () => _showLargePreview(context),
             icon: const Icon(Icons.open_in_full_rounded),
           ),
@@ -321,7 +373,7 @@ class _CompactPreview extends StatelessWidget {
         return Dialog(
           insetPadding: const EdgeInsets.all(18),
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 920, maxHeight: 860),
+            constraints: const BoxConstraints(maxWidth: 980, maxHeight: 860),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(18, 16, 18, 18),
               child: Column(
@@ -329,7 +381,7 @@ class _CompactPreview extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.phone_iphone_rounded),
+                      const Icon(Icons.image_outlined),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
@@ -350,37 +402,38 @@ class _CompactPreview extends StatelessWidget {
                       child: LayoutBuilder(
                         builder: (context, constraints) {
                           final wide = constraints.maxWidth >= 760;
+
+                          final preview = Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              if (LessonVisualPoster.supports(section))
+                                LessonVisualPoster(section: section),
+                              const SizedBox(height: 18),
+                              WidgetMobilePreview(section: section),
+                            ],
+                          );
+
+                          final project = GuidedProjectPanel.supports(section)
+                              ? GuidedProjectPanel(section: section)
+                              : const SizedBox.shrink();
+
                           if (wide) {
                             return Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  width: 350,
-                                  child: WidgetMobilePreview(section: section),
-                                ),
+                                Expanded(child: preview),
                                 const SizedBox(width: 18),
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      WidgetSvgGallery(section: section),
-                                      if (GuidedProjectPanel.supports(section)) ...[
-                                        const SizedBox(height: 18),
-                                        GuidedProjectPanel(section: section),
-                                      ],
-                                    ],
-                                  ),
-                                ),
+                                Expanded(child: project),
                               ],
                             );
                           }
+
                           return Column(
                             children: [
-                              WidgetMobilePreview(section: section),
-                              const SizedBox(height: 18),
-                              WidgetSvgGallery(section: section),
+                              preview,
                               if (GuidedProjectPanel.supports(section)) ...[
                                 const SizedBox(height: 18),
-                                GuidedProjectPanel(section: section),
+                                project,
                               ],
                             ],
                           );
