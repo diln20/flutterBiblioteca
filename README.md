@@ -1,8 +1,8 @@
 # Flutter Biblioteca
 
-Biblioteca interactiva para estudiar **Dart y Flutter** mediante una ruta progresiva, explicaciones, código de referencia, pasos guiados, ejemplos, errores comunes, ejercicios y retos.
+Biblioteca interactiva para estudiar **Dart y Flutter** mediante una ruta progresiva, explicaciones, código de referencia, pasos guiados, ejemplos, errores comunes, ejercicios, retos y proyectos completos.
 
-La interfaz toma como referencia la biblioteca HTML original: conserva navegación por áreas, filtros, búsqueda, favoritos, progreso persistente y diseño responsive, pero está implementada completamente con widgets Flutter.
+La interfaz toma como referencia la biblioteca HTML original: conserva navegación por áreas, búsqueda, favoritos, progreso persistente y diseño responsive, pero está implementada completamente con widgets Flutter.
 
 ## Enfoque de aprendizaje
 
@@ -48,20 +48,41 @@ Después de la base de Dart, la ruta continúa con:
 
 Tanto las lecciones de Dart como las de Flutter cuentan con contenido extendido: **sintaxis esencial, conceptos clave, ejemplos explicados, errores comunes y ejercicios con pistas**, además del código integrador y el reto final de cada módulo.
 
+### Etapa 3 · Proyectos Flutter
+
+La ruta termina con proyectos que integran los conceptos anteriores:
+
+1. Gestor de tareas con CRUD, filtros, estado y persistencia.
+2. Biblioteca personal con búsqueda, favoritos, navegación y responsive.
+3. Aplicación de clima con API, JSON, async, estados y tests.
+4. Proyecto final con arquitectura, datos remotos, persistencia, accesibilidad, pruebas, CI y despliegue.
+
 ## Funciones de la aplicación
 
 - Diseño responsive para escritorio, tableta y móvil.
+- Tema **claro, oscuro o automático según el sistema**, guardado localmente.
+- Dashboard de progreso con completadas, pendientes, favoritos y total de módulos.
 - Sidebar de ruta de aprendizaje en pantallas grandes.
 - Búsqueda por título, categoría, nivel y palabras clave.
-- Filtros por categoría y vista de solo favoritos.
+- Resultados de búsqueda resaltados visualmente.
+- Filtros por categoría, **nivel** y vista de solo favoritos.
 - Favoritos persistentes con `shared_preferences`.
 - Progreso persistente y restauración de la última sección abierta.
-- 30 módulos organizados por etapas.
+- **34 módulos** organizados en Dart, Flutter y proyectos completos.
 - Vista de detalle con explicación, sintaxis, ejemplos, errores comunes, ejercicios, código y reto.
 - Navegación anterior/siguiente entre módulos.
-- Pruebas del catálogo y del contenido educativo.
+- Pruebas del catálogo, contenido educativo y proyectos.
 - Análisis estático y tests automáticos en GitHub Actions.
 - Build y despliegue de Flutter Web con GitHub Pages.
+
+## GitHub Pages
+
+El proyecto soporta las dos configuraciones habituales de GitHub Pages:
+
+- **GitHub Actions**: publica directamente el contenido de `build/web`.
+- **Deploy from a branch**: el workflow copia automáticamente el build a `docs/` y el `index.html` de la raíz redirige a esa aplicación.
+
+Esto evita que GitHub Pages muestre el README como página principal cuando el repositorio todavía está configurado para publicar desde la rama `main`.
 
 ## Estructura
 
@@ -73,6 +94,7 @@ lib/
       dart_lesson_content.dart
       flutter_catalog.dart
       flutter_lesson_content.dart
+      project_catalog.dart
     course_catalog.dart
   models/
     course_section.dart
@@ -83,8 +105,10 @@ lib/
     library_controller.dart
     progress_store.dart
   widgets/
+    filter_label.dart
     library_filters.dart
     library_sidebar.dart
+    progress_dashboard.dart
     section_card.dart
     section_detail_enriched.dart
   app.dart
@@ -113,4 +137,4 @@ flutter analyze
 flutter test
 ```
 
-GitHub Actions ejecuta ambas verificaciones en cada push a `main`. El workflow de Pages también genera el build web con el `base-href` correcto para `/flutterBiblioteca/` y publica el resultado.
+GitHub Actions ejecuta ambas verificaciones en cada push a `main`. El workflow de Pages genera el build web con el `base-href` correcto para `/flutterBiblioteca/`, despliega mediante Actions y mantiene `docs/` como respaldo para configuraciones de Pages basadas en rama.
