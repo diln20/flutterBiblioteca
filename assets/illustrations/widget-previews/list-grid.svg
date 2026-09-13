@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+<style>.bg{fill:#f7fbff}.phone{fill:#111827}.screen{fill:#f8fafc}.bar{fill:#2563eb}.tile{fill:#fff;stroke:#dbeafe;stroke-width:2}.grid{fill:#fff;stroke:#c4b5fd;stroke-width:2}.title{font:700 22px Arial;fill:#0f172a}.small{font:500 14px Arial;fill:#64748b}.white{font:700 18px Arial;fill:#fff}.label{font:700 17px Arial}.pill{fill:#ede9fe}.pill2{fill:#ccfbf1}.line{stroke-width:3;stroke-dasharray:7 7;fill:none}</style>
+<rect width="900" height="560" rx="36" class="bg"/><circle cx="92" cy="470" r="110" fill="#e0f2fe"/><circle cx="820" cy="90" r="85" fill="#ede9fe"/>
+<text x="50" y="74" class="title">ListView + GridView</text><text x="50" y="103" class="small">Listas y cuadrículas en una app real</text>
+<rect x="286" y="28" width="328" height="504" rx="48" class="phone"/><rect x="306" y="48" width="288" height="464" rx="34" class="screen"/>
+<rect x="306" y="82" width="288" height="68" class="bar"/><text x="372" y="124" class="white">Explorar cursos</text>
+<text x="330" y="180" class="title" style="font-size:17px">ListView</text>
+<rect x="330" y="192" width="240" height="54" rx="15" class="tile"/><circle cx="358" cy="219" r="15" fill="#dbeafe"/><text x="388" y="216" class="small">Dart básico</text><text x="388" y="235" class="small">19 lecciones</text>
+<rect x="330" y="254" width="240" height="54" rx="15" class="tile"/><circle cx="358" cy="281" r="15" fill="#ede9fe"/><text x="388" y="278" class="small">Flutter UI</text><text x="388" y="297" class="small">Widgets y layouts</text>
+<text x="330" y="342" class="title" style="font-size:17px">GridView</text>
+<rect x="330" y="354" width="112" height="70" rx="16" class="grid"/><rect x="458" y="354" width="112" height="70" rx="16" class="grid"/><rect x="330" y="436" width="112" height="58" rx="16" class="grid"/><rect x="458" y="436" width="112" height="58" rx="16" class="grid"/>
+<text x="357" y="397" class="small">UI</text><text x="480" y="397" class="small">Estado</text><text x="345" y="471" class="small">Datos</text><text x="476" y="471" class="small">Testing</text>
+<rect x="62" y="215" width="172" height="56" rx="18" class="pill"/><text x="104" y="249" class="label" fill="#7c3aed">ListView</text><path d="M234 243H330" stroke="#8b5cf6" class="line"/>
+<rect x="650" y="382" width="172" height="56" rx="18" class="pill2"/><text x="691" y="416" class="label" fill="#0f766e">GridView</text><path d="M650 410H570" stroke="#14b8a6" class="line"/>
+</svg>
