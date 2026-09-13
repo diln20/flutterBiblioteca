@@ -5,7 +5,7 @@ import '../services/library_controller.dart';
 import '../widgets/library_filters.dart';
 import '../widgets/library_sidebar.dart';
 import '../widgets/section_card.dart';
-import '../widgets/section_detail.dart';
+import '../widgets/section_detail_enriched.dart';
 
 class LibraryHomePage extends StatefulWidget {
   const LibraryHomePage({super.key});
