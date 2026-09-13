@@ -45,11 +45,17 @@ class LibrarySidebar extends StatelessWidget {
                   children: [
                     Text(
                       '${controller.completed.length} de ${controller.total} completadas',
-                      style: const TextStyle(color: Colors.white54, fontSize: 11),
+                      style: const TextStyle(
+                        color: Colors.white54,
+                        fontSize: 11,
+                      ),
                     ),
                     Text(
                       '${(controller.progress * 100).round()}%',
-                      style: const TextStyle(color: Colors.white54, fontSize: 11),
+                      style: const TextStyle(
+                        color: Colors.white54,
+                        fontSize: 11,
+                      ),
                     ),
                   ],
                 ),
@@ -74,19 +80,86 @@ class LibrarySidebar extends StatelessWidget {
                       ),
                     ),
                   )
-                : ListView.separated(
+                : ListView.builder(
                     padding: const EdgeInsets.fromLTRB(12, 8, 12, 20),
                     itemCount: sections.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 8),
-                    itemBuilder: (_, index) {
+                    itemBuilder: (context, index) {
                       final section = sections[index];
-                      return SectionCard(
-                        section: section,
-                        controller: controller,
-                        onOpen: () => controller.select(section.id),
+                      final startsGroup =
+                          index == 0 || sections[index - 1].group != section.group;
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          if (startsGroup)
+                            _GroupHeader(
+                              label: section.group,
+                              completed: controller.completed.where((id) {
+                                return sections.any(
+                                  (candidate) =>
+                                      candidate.id == id &&
+                                      candidate.group == section.group,
+                                );
+                              }).length,
+                              total: sections
+                                  .where(
+                                    (candidate) =>
+                                        candidate.group == section.group,
+                                  )
+                                  .length,
+                            ),
+                          SectionCard(
+                            section: section,
+                            controller: controller,
+                            onOpen: () => controller.select(section.id),
+                          ),
+                          const SizedBox(height: 8),
+                        ],
                       );
                     },
                   ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _GroupHeader extends StatelessWidget {
+  const _GroupHeader({
+    required this.label,
+    required this.completed,
+    required this.total,
+  });
+
+  final String label;
+  final int completed;
+  final int total;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(4, 14, 4, 9),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              label.toUpperCase(),
+              style: const TextStyle(
+                color: Colors.white54,
+                fontSize: 10,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 1,
+              ),
+            ),
+          ),
+          Text(
+            '$completed/$total',
+            style: const TextStyle(
+              color: Colors.white38,
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ],
       ),

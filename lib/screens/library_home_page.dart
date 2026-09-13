@@ -41,11 +41,11 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Biblioteca Flutter',
+                  'Biblioteca Dart + Flutter',
                   style: TextStyle(fontWeight: FontWeight.w800),
                 ),
                 Text(
-                  'Ruta interactiva de Dart y Flutter',
+                  'Dart desde cero → Flutter paso a paso',
                   style: TextStyle(fontSize: 12, color: Colors.white60),
                 ),
               ],
@@ -133,16 +133,36 @@ class _MobileLibrary extends StatelessWidget {
                     ),
                   ),
                 )
-              : ListView.separated(
+              : ListView.builder(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                   itemCount: sections.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 10),
-                  itemBuilder: (_, index) {
+                  itemBuilder: (context, index) {
                     final section = sections[index];
-                    return SectionCard(
-                      section: section,
-                      controller: controller,
-                      onOpen: () => _openDetail(context, section),
+                    final startsGroup =
+                        index == 0 || sections[index - 1].group != section.group;
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        if (startsGroup)
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(4, 14, 4, 8),
+                            child: Text(
+                              section.group.toUpperCase(),
+                              style: const TextStyle(
+                                color: Colors.white54,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                          ),
+                        SectionCard(
+                          section: section,
+                          controller: controller,
+                          onOpen: () => _openDetail(context, section),
+                        ),
+                        const SizedBox(height: 10),
+                      ],
                     );
                   },
                 ),
@@ -157,7 +177,7 @@ class _MobileLibrary extends StatelessWidget {
       MaterialPageRoute<void>(
         builder: (_) => AnimatedBuilder(
           animation: controller,
-          builder: (context, __) {
+          builder: (context, _) {
             return Scaffold(
               appBar: AppBar(title: Text(controller.selected.title)),
               body: SectionDetail(

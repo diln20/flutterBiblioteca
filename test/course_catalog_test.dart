@@ -1,3 +1,4 @@
+import 'package:flutter_biblioteca/data/catalog/dart_lesson_content.dart';
 import 'package:flutter_biblioteca/data/course_catalog.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -79,6 +80,22 @@ void main() {
       'import',
     ]) {
       expect(dartKeywords, contains(concept));
+    }
+  });
+
+  test('every Dart lesson has rich examples, mistakes and exercises', () {
+    final dartSections = courseCatalog.where(
+      (section) => section.group == 'Dart básico',
+    );
+
+    for (final section in dartSections) {
+      final content = dartLessonContent[section.id];
+      expect(content, isNotNull, reason: 'Missing rich content for ${section.id}');
+      expect(content!.syntax.trim(), isNotEmpty);
+      expect(content.concepts.length, greaterThanOrEqualTo(3));
+      expect(content.examples.length, greaterThanOrEqualTo(2));
+      expect(content.commonMistakes.length, greaterThanOrEqualTo(3));
+      expect(content.exercises.length, greaterThanOrEqualTo(3));
     }
   });
 }

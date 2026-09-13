@@ -30,8 +30,8 @@ class LibraryFilters extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: controller.groups.length,
-              separatorBuilder: (_, __) => const SizedBox(width: 8),
-              itemBuilder: (_, index) {
+              separatorBuilder: (_, _) => const SizedBox(width: 8),
+              itemBuilder: (context, index) {
                 final group = controller.groups[index];
                 return ChoiceChip(
                   label: Text(group),
