@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+<style>.bg{fill:#f8fbff}.phone{fill:#111827}.screen{fill:#fff}.bar{fill:#8b5cf6}.card{fill:#fff;stroke:#ddd6fe;stroke-width:2}.switch{fill:#ede9fe}.track{fill:#c4b5fd}.thumb{fill:#7c3aed}.title{font:700 22px Arial;fill:#0f172a}.small{font:500 14px Arial;fill:#64748b}.white{font:700 18px Arial;fill:#fff}.label{font:700 17px Arial}.pill{fill:#ede9fe}.pill2{fill:#fce7f3}.pill3{fill:#ccfbf1}.line{stroke-width:3;stroke-dasharray:7 7;fill:none}</style>
+<rect width="900" height="560" rx="36" class="bg"/><circle cx="90" cy="90" r="76" fill="#ede9fe"/><circle cx="820" cy="480" r="110" fill="#ccfbf1"/>
+<text x="50" y="74" class="title">Theme, animación e interacción</text><text x="50" y="103" class="small">Sistema visual y respuesta al usuario</text>
+<rect x="286" y="28" width="328" height="504" rx="48" class="phone"/><rect x="306" y="48" width="288" height="464" rx="34" class="screen"/>
+<rect x="306" y="82" width="288" height="68" class="bar"/><text x="390" y="124" class="white">Apariencia</text>
+<rect x="334" y="180" width="232" height="82" rx="18" class="card"/><text x="354" y="212" class="title" style="font-size:18px">Material 3</text><text x="354" y="238" class="small">ColorScheme + ThemeData</text><rect x="492" y="196" width="54" height="30" rx="15" class="track"/><circle cx="528" cy="211" r="12" class="thumb"/>
+<rect x="334" y="286" width="232" height="92" rx="18" class="card"/><text x="354" y="316" class="title" style="font-size:18px">AnimatedContainer</text><rect x="354" y="334" width="76" height="26" rx="13" fill="#f9a8d4"/><rect x="446" y="326" width="102" height="42" rx="21" fill="#f472b6"/>
+<rect x="334" y="400" width="232" height="72" rx="18" class="card"/><text x="354" y="430" class="title" style="font-size:18px">InkWell / Focus</text><rect x="354" y="442" width="194" height="18" rx="9" fill="#ccfbf1"/>
+<rect x="56" y="190" width="176" height="56" rx="18" class="pill"/><text x="102" y="224" class="label" fill="#7c3aed">Theme</text><path d="M232 218H334" stroke="#8b5cf6" class="line"/>
+<rect x="646" y="302" width="180" height="56" rx="18" class="pill2"/><text x="678" y="336" class="label" fill="#be185d">Animation</text><path d="M646 330H566" stroke="#ec4899" class="line"/>
+<rect x="646" y="414" width="180" height="56" rx="18" class="pill3"/><text x="674" y="448" class="label" fill="#0f766e">Interaction</text><path d="M646 442H566" stroke="#14b8a6" class="line"/>
+</svg>

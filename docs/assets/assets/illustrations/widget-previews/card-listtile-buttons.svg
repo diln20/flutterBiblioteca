@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+<style>.bg{fill:#f7fbff}.phone{fill:#111827}.screen{fill:#f8fafc}.bar{fill:#2563eb}.card{fill:#fff;stroke:#dbeafe;stroke-width:2}.tile{fill:#fff;stroke:#e2e8f0;stroke-width:2}.title{font:700 22px Arial;fill:#0f172a}.small{font:500 14px Arial;fill:#64748b}.white{font:700 18px Arial;fill:#fff}.btn{fill:#2563eb}.outline{fill:#fff;stroke:#2563eb;stroke-width:2}.label{font:700 17px Arial}.pill{fill:#ede9fe}.pill2{fill:#ccfbf1}.pill3{fill:#dbeafe}.line{stroke-width:3;stroke-dasharray:7 7;fill:none}</style>
+<rect width="900" height="560" rx="36" class="bg"/><circle cx="88" cy="88" r="76" fill="#ede9fe"/><circle cx="820" cy="480" r="110" fill="#ccfbf1"/>
+<text x="52" y="76" class="title">Card, ListTile y botones</text><text x="52" y="104" class="small">Bloques comunes de una interfaz móvil</text>
+<rect x="286" y="28" width="328" height="504" rx="48" class="phone"/><rect x="306" y="48" width="288" height="464" rx="34" class="screen"/>
+<rect x="306" y="82" width="288" height="68" class="bar"/><text x="382" y="124" class="white">Mi cuenta</text>
+<rect x="330" y="176" width="240" height="96" rx="20" class="card"/><circle cx="370" cy="224" r="25" fill="#dbeafe"/><text x="408" y="215" class="title">Curso Flutter</text><text x="408" y="241" class="small">12 lecciones · 65%</text>
+<rect x="330" y="292" width="240" height="62" rx="16" class="tile"/><circle cx="360" cy="323" r="16" fill="#ede9fe"/><text x="392" y="318" class="title" style="font-size:17px">Favoritos</text><text x="392" y="340" class="small">8 elementos guardados</text><text x="545" y="328" class="small">›</text>
+<rect x="330" y="372" width="240" height="46" rx="14" class="btn"/><text x="399" y="401" class="white">Guardar cambios</text>
+<rect x="330" y="430" width="240" height="46" rx="14" class="outline"/><text x="415" y="459" style="font:700 16px Arial;fill:#2563eb">Editar perfil</text>
+<rect x="62" y="188" width="170" height="56" rx="18" class="pill"/><text x="115" y="222" class="label" fill="#7c3aed">Card</text><path d="M232 216H330" stroke="#8b5cf6" class="line"/>
+<rect x="648" y="288" width="176" height="56" rx="18" class="pill2"/><text x="690" y="322" class="label" fill="#0f766e">ListTile</text><path d="M648 316H570" stroke="#14b8a6" class="line"/>
+<rect x="650" y="408" width="176" height="56" rx="18" class="pill3"/><text x="690" y="442" class="label" fill="#2563eb">Buttons</text><path d="M650 436H570" stroke="#2563eb" class="line"/>
+</svg>

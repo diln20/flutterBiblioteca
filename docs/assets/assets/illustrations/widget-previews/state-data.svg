@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+<style>.bg{fill:#f8fbff}.phone{fill:#111827}.screen{fill:#fff}.bar{fill:#10b981}.card{fill:#f8fafc;stroke:#d1fae5;stroke-width:2}.chip{fill:#d1fae5}.load{fill:#e0f2fe}.store{fill:#ede9fe}.title{font:700 22px Arial;fill:#0f172a}.small{font:500 14px Arial;fill:#64748b}.white{font:700 18px Arial;fill:#fff}.label{font:700 17px Arial}.pill{fill:#d1fae5}.pill2{fill:#dbeafe}.pill3{fill:#ede9fe}.line{stroke-width:3;stroke-dasharray:7 7;fill:none}</style>
+<rect width="900" height="560" rx="36" class="bg"/><circle cx="95" cy="90" r="78" fill="#d1fae5"/><circle cx="820" cy="480" r="110" fill="#ede9fe"/>
+<text x="50" y="74" class="title">Estado, async y persistencia</text><text x="50" y="103" class="small">Cómo cambia y se conserva la información</text>
+<rect x="286" y="28" width="328" height="504" rx="48" class="phone"/><rect x="306" y="48" width="288" height="464" rx="34" class="screen"/>
+<rect x="306" y="82" width="288" height="68" class="bar"/><text x="372" y="124" class="white">Mi progreso</text>
+<rect x="334" y="178" width="232" height="92" rx="18" class="card"/><text x="354" y="208" class="title" style="font-size:18px">Lecciones completadas</text><text x="354" y="246" style="font:700 32px Arial;fill:#10b981">12</text><rect x="438" y="222" width="98" height="28" rx="14" class="chip"/><text x="456" y="241" class="small">+2 hoy</text>
+<rect x="334" y="292" width="232" height="70" rx="18" class="load"/><text x="354" y="320" class="title" style="font-size:17px">Future / async</text><text x="354" y="346" class="small">Cargando cursos remotos...</text><circle cx="532" cy="326" r="14" fill="none" stroke="#2563eb" stroke-width="5" stroke-dasharray="30 16"/>
+<rect x="334" y="382" width="232" height="80" rx="18" class="store"/><text x="354" y="411" class="title" style="font-size:17px">SharedPreferences</text><text x="354" y="437" class="small">Favoritos y progreso guardados</text>
+<rect x="60" y="188" width="174" height="56" rx="18" class="pill"/><text x="112" y="222" class="label" fill="#047857">Estado</text><path d="M234 216H334" stroke="#10b981" class="line"/>
+<rect x="650" y="300" width="174" height="56" rx="18" class="pill2"/><text x="696" y="334" class="label" fill="#2563eb">Future</text><path d="M650 328H566" stroke="#2563eb" class="line"/>
+<rect x="650" y="394" width="174" height="56" rx="18" class="pill3"/><text x="675" y="428" class="label" fill="#7c3aed">Persistencia</text><path d="M650 422H566" stroke="#8b5cf6" class="line"/>
+</svg>

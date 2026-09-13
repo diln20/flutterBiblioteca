@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+<style>.bg{fill:#f7fbff}.phone{fill:#111827}.screen{fill:#fff}.bar{fill:#0ea5e9}.outer{fill:#dbeafe;stroke:#60a5fa;stroke-width:3}.pad{fill:#f5f3ff;stroke:#8b5cf6;stroke-width:3;stroke-dasharray:9 7}.center{fill:#fff;stroke:#ddd6fe;stroke-width:2}.title{font:700 22px Arial;fill:#0f172a}.small{font:500 15px Arial;fill:#64748b}.white{font:700 18px Arial;fill:#fff}.blue{font:700 17px Arial;fill:#2563eb}.purple{font:700 17px Arial;fill:#7c3aed}.teal{font:700 17px Arial;fill:#0f766e}.pill{fill:#dbeafe}.pill2{fill:#ede9fe}.pill3{fill:#ccfbf1}.line{stroke-width:3;stroke-dasharray:7 7;fill:none}</style>
+<rect width="900" height="560" rx="36" class="bg"/><circle cx="100" cy="90" r="75" fill="#e0f2fe"/><circle cx="820" cy="470" r="110" fill="#ccfbf1"/>
+<text x="52" y="76" class="title">Container, Padding y Center</text><text x="52" y="105" class="small">Cómo se compone un bloque visual</text>
+<rect x="290" y="30" width="320" height="500" rx="48" class="phone"/><rect x="310" y="50" width="280" height="460" rx="34" class="screen"/>
+<rect x="310" y="82" width="280" height="70" class="bar"/><text x="362" y="125" class="white">Caja de contenido</text>
+<rect x="342" y="190" width="216" height="250" rx="26" class="outer"/>
+<rect x="365" y="215" width="170" height="200" rx="20" class="pad"/>
+<rect x="397" y="270" width="106" height="96" rx="18" class="center"/><circle cx="450" cy="302" r="18" fill="#ddd6fe"/><text x="423" y="344" class="small">Centrado</text>
+<text x="385" y="238" class="purple">padding</text><text x="385" y="402" class="purple">padding</text>
+<rect x="650" y="170" width="172" height="56" rx="18" class="pill"/><text x="684" y="204" class="blue">Container</text><path d="M650 198H558" stroke="#2563eb" class="line"/>
+<rect x="64" y="280" width="170" height="56" rx="18" class="pill2"/><text x="112" y="314" class="purple">Padding</text><path d="M234 308H365" stroke="#8b5cf6" class="line"/>
+<rect x="650" y="360" width="172" height="56" rx="18" class="pill3"/><text x="704" y="394" class="teal">Center</text><path d="M650 388H503" stroke="#14b8a6" class="line"/>
+</svg>

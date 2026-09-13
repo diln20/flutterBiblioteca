@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+<style>.bg{fill:#f8fbff}.phone{fill:#111827}.screen{fill:#fff}.bar{fill:#14b8a6}.field{fill:#fff;stroke:#cbd5e1;stroke-width:2}.fieldErr{fill:#fff;stroke:#ef4444;stroke-width:2}.btn{fill:#2563eb}.title{font:700 22px Arial;fill:#0f172a}.small{font:500 14px Arial;fill:#64748b}.white{font:700 18px Arial;fill:#fff}.label{font:700 17px Arial}.pill{fill:#ede9fe}.pill2{fill:#ccfbf1}.line{stroke-width:3;stroke-dasharray:7 7;fill:none}</style>
+<rect width="900" height="560" rx="36" class="bg"/><circle cx="95" cy="90" r="78" fill="#ede9fe"/><circle cx="812" cy="480" r="115" fill="#ccfbf1"/>
+<text x="50" y="74" class="title">Form + TextField</text><text x="50" y="103" class="small">Entrada de datos y validación</text>
+<rect x="292" y="28" width="316" height="504" rx="48" class="phone"/><rect x="312" y="48" width="276" height="464" rx="34" class="screen"/>
+<rect x="312" y="82" width="276" height="68" class="bar"/><text x="375" y="124" class="white">Crear cuenta</text>
+<text x="336" y="188" class="small">Nombre completo</text><rect x="334" y="198" width="232" height="52" rx="14" class="field"/><text x="350" y="230" class="small">Ana Torres</text>
+<text x="336" y="280" class="small">Correo</text><rect x="334" y="290" width="232" height="52" rx="14" class="field"/><text x="350" y="322" class="small">ana@email.com</text>
+<text x="336" y="372" class="small">Contraseña</text><rect x="334" y="382" width="232" height="52" rx="14" class="fieldErr"/><text x="350" y="414" class="small">••••</text><text x="336" y="454" style="font:500 13px Arial;fill:#ef4444">Mínimo 8 caracteres</text>
+<rect x="334" y="472" width="232" height="42" rx="13" class="btn"/><text x="405" y="499" class="white">Continuar</text>
+<rect x="64" y="210" width="172" height="56" rx="18" class="pill"/><text x="104" y="244" class="label" fill="#7c3aed">TextField</text><path d="M236 238H334" stroke="#8b5cf6" class="line"/>
+<rect x="650" y="310" width="170" height="56" rx="18" class="pill2"/><text x="706" y="344" class="label" fill="#0f766e">Form</text><path d="M650 338H566" stroke="#14b8a6" class="line"/>
+</svg>

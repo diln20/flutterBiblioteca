@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560">
+<style>.bg{fill:#f8fbff}.phone{fill:#111827}.screen{fill:#fff}.hero{fill:#dbeafe}.mount{fill:#60a5fa}.mount2{fill:#0ea5e9}.title{font:700 24px Arial;fill:#0f172a}.small{font:500 15px Arial;fill:#64748b}.label{font:700 17px Arial}.pill{fill:#dbeafe}.pill2{fill:#ede9fe}.pill3{fill:#ccfbf1}.line{stroke-width:3;stroke-dasharray:7 7;fill:none}</style>
+<rect width="900" height="560" rx="36" class="bg"/><circle cx="90" cy="470" r="110" fill="#e0f2fe"/><circle cx="815" cy="90" r="85" fill="#ede9fe"/>
+<text x="52" y="76" class="title">Text, Icon e Image</text><text x="52" y="105" class="small">Contenido visual básico dentro de una app</text>
+<rect x="292" y="30" width="316" height="500" rx="48" class="phone"/><rect x="312" y="50" width="276" height="460" rx="34" class="screen"/>
+<rect x="334" y="90" width="232" height="160" rx="22" class="hero"/><circle cx="520" cy="130" r="20" fill="#fff"/><path d="M345 225L410 155L455 205L495 165L555 225Z" class="mount"/><path d="M345 225L395 180L430 215L465 190L505 225Z" class="mount2"/>
+<text x="335" y="292" class="title">Explora Flutter</text><text x="335" y="320" class="small">Aprende widgets construyendo</text><text x="335" y="344" class="small">interfaces reales paso a paso.</text>
+<circle cx="372" cy="405" r="28" fill="#dbeafe"/><text x="358" y="413" style="font:700 26px Arial;fill:#2563eb">★</text><circle cx="450" cy="405" r="28" fill="#ede9fe"/><text x="438" y="414" style="font:700 26px Arial;fill:#7c3aed">⚡</text><circle cx="528" cy="405" r="28" fill="#ccfbf1"/><text x="515" y="414" style="font:700 26px Arial;fill:#0f766e">✓</text>
+<rect x="62" y="180" width="172" height="56" rx="18" class="pill"/><text x="116" y="214" class="label" fill="#2563eb">Image</text><path d="M234 208H334" stroke="#2563eb" class="line"/>
+<rect x="650" y="286" width="170" height="56" rx="18" class="pill2"/><text x="708" y="320" class="label" fill="#7c3aed">Text</text><path d="M650 314H565" stroke="#8b5cf6" class="line"/>
+<rect x="650" y="390" width="170" height="56" rx="18" class="pill3"/><text x="706" y="424" class="label" fill="#0f766e">Icon</text><path d="M650 418H556" stroke="#14b8a6" class="line"/>
+</svg>
