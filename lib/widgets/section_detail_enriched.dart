@@ -6,6 +6,7 @@ import '../data/catalog/flutter_lesson_content.dart';
 import '../models/course_section.dart';
 import '../models/lesson_content.dart';
 import '../services/library_controller.dart';
+import 'dart_code_location_hint.dart';
 import 'lesson_illustration.dart';
 import 'widget_mobile_preview.dart';
 
@@ -105,7 +106,19 @@ class SectionDetail extends StatelessWidget {
                   title: 'Sintaxis esencial',
                   subtitle:
                       'La forma mínima que debes reconocer antes de pasar a los ejemplos.',
-                  child: _CodeBlock(code: content!.syntax),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (DartCodeLocationHint.supports(section)) ...[
+                        DartCodeLocationHint(
+                          section: section,
+                          label: 'Pon esta sintaxis en',
+                        ),
+                        const SizedBox(height: 12),
+                      ],
+                      _CodeBlock(code: content!.syntax),
+                    ],
+                  ),
                 ),
               ],
               if (content?.examples.isNotEmpty == true) ...[
@@ -124,6 +137,7 @@ class SectionDetail extends StatelessWidget {
                           number: index + 1,
                           example: content.examples[index],
                           accent: accent,
+                          section: section,
                         ),
                         if (index != content.examples.length - 1)
                           const SizedBox(height: 14),
@@ -138,7 +152,19 @@ class SectionDetail extends StatelessWidget {
                 title: content == null
                     ? 'Código de referencia'
                     : 'Ejemplo integrador de la lección',
-                child: _CodeBlock(code: section.code),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (DartCodeLocationHint.supports(section)) ...[
+                      DartCodeLocationHint(
+                        section: section,
+                        label: 'Integra este código en',
+                      ),
+                      const SizedBox(height: 12),
+                    ],
+                    _CodeBlock(code: section.code),
+                  ],
+                ),
               ),
               if (content?.commonMistakes.isNotEmpty == true) ...[
                 const SizedBox(height: 18),
@@ -161,7 +187,16 @@ class SectionDetail extends StatelessWidget {
                   subtitle:
                       'Intenta resolverlos sin copiar los ejemplos. Usa la pista solo si te bloqueas.',
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      if (DartCodeLocationHint.supports(section)) ...[
+                        DartCodeLocationHint(
+                          section: section,
+                          label: 'Resuelve estos ejercicios en',
+                          compact: true,
+                        ),
+                        const SizedBox(height: 12),
+                      ],
                       for (var index = 0;
                           index < content!.exercises.length;
                           index++) ...[
@@ -326,11 +361,13 @@ class _ExampleCard extends StatelessWidget {
     required this.number,
     required this.example,
     required this.accent,
+    required this.section,
   });
 
   final int number;
   final LessonExample example;
   final Color accent;
+  final CourseSection section;
 
   @override
   Widget build(BuildContext context) {
@@ -368,6 +405,14 @@ class _ExampleCard extends StatelessWidget {
             example.explanation,
             style: const TextStyle(height: 1.5),
           ),
+          if (DartCodeLocationHint.supports(section)) ...[
+            const SizedBox(height: 10),
+            DartCodeLocationHint(
+              section: section,
+              label: 'Prueba este ejemplo en',
+              compact: true,
+            ),
+          ],
           const SizedBox(height: 12),
           _CodeBlock(code: example.code),
           if (example.output.isNotEmpty) ...[
