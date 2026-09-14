@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../models/course_section.dart';
-import 'svg_compat.dart';
+import 'html_asset_image.dart';
 import 'widget_visual_carousel.dart';
 
 /// Imagen principal de cada lección Flutter.
 ///
-/// El poster se muestra dentro del contenido de la lección para que el
-/// estudiante relacione inmediatamente el concepto con una interfaz móvil.
-/// Debajo incluye un carrusel navegable con una imagen individual por widget.
+/// En Flutter Web el poster se pinta como un `<img>` HTML real para que el
+/// navegador interprete el SVG completo sin perder estilos. En otras
+/// plataformas usa el fallback compatible de Flutter.
 class LessonVisualPoster extends StatelessWidget {
   const LessonVisualPoster({
     super.key,
@@ -100,7 +100,7 @@ class LessonVisualPoster extends StatelessWidget {
         children: [
           AspectRatio(
             aspectRatio: 900 / 560,
-            child: CompatibleSvgAsset(
+            child: HtmlAssetImage(
               asset: asset,
               fit: BoxFit.cover,
               semanticsLabel: 'Imagen visual de ${section.title}',
