@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../data/dart_progressive_plan.dart';
 import '../data/progressive_app_plan.dart';
 import '../models/course_section.dart';
 import '../models/guided_build_step.dart';
@@ -13,13 +14,18 @@ class GuidedProjectPanel extends StatelessWidget {
   final CourseSection section;
 
   static bool supports(CourseSection section) =>
-      progressiveAppPlan.containsKey(section.id);
+      progressiveAppPlan.containsKey(section.id) ||
+      dartProgressivePlan.containsKey(section.id);
+
+  static GuidedBuildStep? stepFor(CourseSection section) =>
+      progressiveAppPlan[section.id] ?? dartProgressivePlan[section.id];
 
   @override
   Widget build(BuildContext context) {
-    final step = progressiveAppPlan[section.id];
+    final step = stepFor(section);
     if (step == null) return const SizedBox.shrink();
 
+    final isDart = dartProgressivePlan.containsKey(section.id);
     final accent = Color(section.accentValue);
     final scheme = Theme.of(context).colorScheme;
 
@@ -37,7 +43,11 @@ class GuidedProjectPanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _Header(step: step, accent: accent),
+          _Header(
+            step: step,
+            accent: accent,
+            isDart: isDart,
+          ),
           const SizedBox(height: 14),
           LinearProgressIndicator(
             value: step.number / step.total,
@@ -51,7 +61,10 @@ class GuidedProjectPanel extends StatelessWidget {
           ),
           if (step.commands.isNotEmpty) ...[
             const SizedBox(height: 18),
-            _SectionLabel(icon: Icons.terminal_rounded, label: 'Comandos'),
+            const _SectionLabel(
+              icon: Icons.terminal_rounded,
+              label: 'Comandos',
+            ),
             const SizedBox(height: 8),
             _CodeList(items: step.commands),
           ],
@@ -94,17 +107,33 @@ class GuidedProjectPanel extends StatelessWidget {
               );
             },
           ),
+          if (step.codePlacement.isNotEmpty) ...[
+            const SizedBox(height: 18),
+            const _SectionLabel(
+              icon: Icons.account_tree_outlined,
+              label: 'Dónde poner el código',
+            ),
+            const SizedBox(height: 10),
+            _CodePlacementList(
+              entries: step.codePlacement,
+              accent: accent,
+            ),
+          ],
           const SizedBox(height: 18),
           _SectionLabel(
             icon: Icons.construction_rounded,
-            label: 'Construye esta parte ahora',
+            label: isDart
+                ? 'Programa esta parte ahora'
+                : 'Construye esta parte ahora',
           ),
           const SizedBox(height: 10),
           _TaskList(tasks: step.tasks, accent: accent),
           const SizedBox(height: 18),
           _ResultCard(
             title: 'Resultado esperado',
-            icon: Icons.phone_android_rounded,
+            icon: isDart
+                ? Icons.terminal_rounded
+                : Icons.phone_android_rounded,
             text: step.expectedResult,
             accent: accent,
           ),
@@ -122,10 +151,15 @@ class GuidedProjectPanel extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({required this.step, required this.accent});
+  const _Header({
+    required this.step,
+    required this.accent,
+    required this.isDart,
+  });
 
   final GuidedBuildStep step;
   final Color accent;
+  final bool isDart;
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +174,10 @@ class _Header extends StatelessWidget {
             color: accent.withValues(alpha: .12),
             borderRadius: BorderRadius.circular(13),
           ),
-          child: Icon(Icons.build_circle_outlined, color: accent),
+          child: Icon(
+            isDart ? Icons.code_rounded : Icons.build_circle_outlined,
+            color: accent,
+          ),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -148,7 +185,9 @@ class _Header extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'PROYECTO CONTINUO · MI BIBLIOTECA',
+                isDart
+                    ? 'PROYECTO DART · BIBLIOTECA DE CONSOLA'
+                    : 'PROYECTO CONTINUO · MI BIBLIOTECA',
                 style: TextStyle(
                   color: accent,
                   fontSize: 10.5,
@@ -166,7 +205,9 @@ class _Header extends StatelessWidget {
               ),
               const SizedBox(height: 3),
               Text(
-                'Paso ${step.number} de ${step.total} · Continúa sobre lo construido en la lección anterior.',
+                isDart
+                    ? 'Paso ${step.number} de ${step.total} · Continúa sobre el mismo proyecto de consola.'
+                    : 'Paso ${step.number} de ${step.total} · Continúa sobre lo construido en la lección anterior.',
                 style: TextStyle(
                   color: scheme.onSurfaceVariant,
                   fontSize: 11.5,
@@ -236,7 +277,10 @@ class _FilesCard extends StatelessWidget {
               const SizedBox(width: 7),
               Text(
                 title,
-                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900),
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
             ],
           ),
@@ -257,7 +301,11 @@ class _FilesCard extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.description_outlined, size: 14, color: accent),
+                    Icon(
+                      Icons.description_outlined,
+                      size: 14,
+                      color: accent,
+                    ),
                     const SizedBox(width: 7),
                     Expanded(
                       child: SelectableText(
@@ -278,6 +326,83 @@ class _FilesCard extends StatelessWidget {
   }
 }
 
+class _CodePlacementList extends StatelessWidget {
+  const _CodePlacementList({
+    required this.entries,
+    required this.accent,
+  });
+
+  final Map<String, String> entries;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+
+    return Column(
+      children: [
+        for (final entry in entries.entries)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(13),
+              decoration: BoxDecoration(
+                color: scheme.surfaceContainerLowest,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: scheme.outlineVariant),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: accent.withValues(alpha: .11),
+                      borderRadius: BorderRadius.circular(9),
+                    ),
+                    child: Icon(
+                      Icons.code_rounded,
+                      size: 16,
+                      color: accent,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SelectableText(
+                          entry.key,
+                          style: TextStyle(
+                            color: accent,
+                            fontFamily: 'monospace',
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          entry.value,
+                          style: TextStyle(
+                            color: scheme.onSurfaceVariant,
+                            fontSize: 11,
+                            height: 1.45,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
 class _TaskList extends StatelessWidget {
   const _TaskList({required this.tasks, required this.accent});
 
@@ -290,7 +415,9 @@ class _TaskList extends StatelessWidget {
       children: [
         for (var index = 0; index < tasks.length; index++)
           Padding(
-            padding: EdgeInsets.only(bottom: index == tasks.length - 1 ? 0 : 10),
+            padding: EdgeInsets.only(
+              bottom: index == tasks.length - 1 ? 0 : 10,
+            ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -313,7 +440,10 @@ class _TaskList extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: Text(tasks[index], style: const TextStyle(height: 1.45)),
+                  child: Text(
+                    tasks[index],
+                    style: const TextStyle(height: 1.45),
+                  ),
                 ),
               ],
             ),
@@ -390,10 +520,16 @@ class _ResultCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900),
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
                 const SizedBox(height: 4),
-                Text(text, style: const TextStyle(fontSize: 11.5, height: 1.45)),
+                Text(
+                  text,
+                  style: const TextStyle(fontSize: 11.5, height: 1.45),
+                ),
               ],
             ),
           ),
