@@ -7,10 +7,10 @@ import 'lesson_visual_poster.dart';
 import 'section_detail_enriched.dart';
 import 'widget_mobile_preview.dart';
 
-/// Compone cada lección Flutter con tres capas:
-/// 1. imagen representativa del concepto,
-/// 2. preview real de la interfaz móvil,
-/// 3. práctica incremental sobre la app "Mi Biblioteca".
+/// Compone una lección con material visual/práctico cuando existe.
+///
+/// En Flutter combina imagen, preview móvil y proyecto incremental. En Dart
+/// muestra la guía de archivos, ubicación del código y proyecto de consola.
 class LessonDetailView extends StatelessWidget {
   const LessonDetailView({
     super.key,
@@ -91,6 +91,7 @@ class _DesktopLearningRail extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final accent = Color(section.accentValue);
+    final isDart = section.group == 'Dart básico';
 
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
@@ -108,25 +109,32 @@ class _DesktopLearningRail extends StatelessWidget {
                     color: accent.withValues(alpha: .12),
                     borderRadius: BorderRadius.circular(11),
                   ),
-                  child: Icon(Icons.school_rounded, color: accent),
+                  child: Icon(
+                    isDart ? Icons.code_rounded : Icons.school_rounded,
+                    color: accent,
+                  ),
                 ),
                 const SizedBox(width: 10),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'APRENDE VIENDO Y CONSTRUYENDO',
-                        style: TextStyle(
+                        isDart
+                            ? 'APRENDE DART PROGRAMANDO'
+                            : 'APRENDE VIENDO Y CONSTRUYENDO',
+                        style: const TextStyle(
                           fontSize: 10.5,
                           fontWeight: FontWeight.w900,
                           letterSpacing: .75,
                         ),
                       ),
-                      SizedBox(height: 2),
+                      const SizedBox(height: 2),
                       Text(
-                        'Imagen · preview móvil · práctica guiada',
-                        style: TextStyle(fontSize: 10.5),
+                        isDart
+                            ? 'Archivos · ubicación del código · práctica guiada'
+                            : 'Imagen · preview móvil · práctica guiada',
+                        style: const TextStyle(fontSize: 10.5),
                       ),
                     ],
                   ),
@@ -218,6 +226,7 @@ class _CompactProjectStep extends StatelessWidget {
   Widget build(BuildContext context) {
     final accent = Color(section.accentValue);
     final scheme = Theme.of(context).colorScheme;
+    final isDart = section.group == 'Dart básico';
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
@@ -246,27 +255,31 @@ class _CompactProjectStep extends StatelessWidget {
                     borderRadius: BorderRadius.circular(11),
                   ),
                   child: Icon(
-                    Icons.construction_rounded,
+                    isDart ? Icons.code_rounded : Icons.construction_rounded,
                     color: accent,
                     size: 20,
                   ),
                 ),
                 const SizedBox(width: 11),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Continúa construyendo Mi Biblioteca',
-                        style: TextStyle(
+                        isDart
+                            ? 'Continúa la Biblioteca de consola'
+                            : 'Continúa construyendo Mi Biblioteca',
+                        style: const TextStyle(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w900,
                         ),
                       ),
-                      SizedBox(height: 3),
+                      const SizedBox(height: 3),
                       Text(
-                        'Archivos, tareas y resultado esperado de esta etapa.',
-                        style: TextStyle(fontSize: 10.5, height: 1.35),
+                        isDart
+                            ? 'Archivos, dónde poner el código, tareas y comandos.'
+                            : 'Archivos, tareas y resultado esperado de esta etapa.',
+                        style: const TextStyle(fontSize: 10.5, height: 1.35),
                       ),
                     ],
                   ),
