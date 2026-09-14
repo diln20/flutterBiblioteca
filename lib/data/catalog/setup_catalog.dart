@@ -11,24 +11,48 @@ const setupCatalog = <CourseSection>[
         'Prepara Dart, la terminal y el editor. Aprende cuándo necesitas instalar Dart por separado y cómo comprobar que todo funciona.',
     whyItMatters:
         'Antes de escribir código necesitas poder ejecutar dart desde cualquier terminal. Si vas a instalar Flutter, recuerda que Flutter ya incluye el SDK completo de Dart y no necesitas duplicar la instalación.',
-    code: r'''# 1. Comprueba si Dart ya está disponible
+    code: r'''# RECOMENDADO SI VAS A USAR FLUTTER
+# Flutter ya incluye Dart. Comprueba ambos:
+flutter --version
 dart --version
 
-# 2. Crea un proyecto de prueba
+# SOLO SI QUIERES DART INDEPENDIENTE
+
+# Windows · PowerShell como administrador + Chocolatey
+choco install dart-sdk
+dart --version
+
+# macOS · Homebrew
+brew tap dart-lang/dart
+brew trust dart-lang/dart
+brew install dart
+dart --version
+
+# Ubuntu / Debian
+sudo apt-get update
+sudo apt-get install apt-transport-https gpg
+wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub \
+  | sudo gpg --dearmor -o /usr/share/keyrings/dart.gpg
+
+echo 'deb [signed-by=/usr/share/keyrings/dart.gpg arch=amd64] https://storage.googleapis.com/download.dartlang.org/linux/debian stable main' \
+  | sudo tee /etc/apt/sources.list.d/dart_stable.list
+
+sudo apt-get update
+sudo apt-get install dart
+dart --version
+
+# PRUEBA FINAL DEL ENTORNO
 dart create -t console-simple hola_dart
 cd hola_dart
-
-# 3. Ejecuta el proyecto
 dart run
-
-# 4. Revisa herramientas básicas
 dart format .
 dart analyze''',
     steps: [
-      'Decide si usarás el Dart incluido con Flutter o un SDK de Dart independiente.',
-      'Instala o verifica Dart y confirma que dart --version funciona en una terminal nueva.',
-      'Configura VS Code con la extensión Dart o el editor que prefieras.',
-      'Crea y ejecuta un proyecto de consola para comprobar PATH, SDK y editor.',
+      'Si estudiarás Flutter, instala Flutter y usa el Dart incluido. Solo instala Dart independiente si realmente lo necesitas.',
+      'Windows: usa Chocolatey para Dart independiente. macOS: Homebrew. Ubuntu/Debian: repositorio oficial + apt.',
+      'Comprueba PATH con dart --version desde una terminal nueva. Si el comando no existe, revisa la ruta del SDK y reinicia terminal/VS Code.',
+      'Instala VS Code y la extensión Dart para autocompletado, análisis y ejecución desde el editor.',
+      'Crea hola_dart, ejecútalo, modifícalo y comprueba dart format . y dart analyze antes de continuar.',
     ],
     challenge:
         'Crea un proyecto de consola desde cero, ejecútalo, modifícalo y verifica que dart analyze termine sin errores.',
@@ -38,6 +62,9 @@ dart analyze''',
       'path',
       'vscode',
       'terminal',
+      'windows',
+      'macos',
+      'linux',
       'dart create',
       'dart run',
     ],
@@ -52,37 +79,53 @@ dart analyze''',
         'Instala Flutter, configura PATH, VS Code y un destino de ejecución. Después deja flutter doctor sin problemas importantes.',
     whyItMatters:
         'Una configuración correcta evita errores que parecen de código pero en realidad vienen del SDK, Android Studio, licencias, PATH o dispositivos. Flutter incluye Dart automáticamente.',
-    code: r'''# Comprueba Flutter y Dart
+    code: r'''# 1. COMPROBAR SDK Y PATH
 flutter --version
 dart --version
-
-# Diagnóstico completo
 flutter doctor -v
 
-# Comprueba dispositivos disponibles
+# 2. OPCIÓN RÁPIDA: FLUTTER WEB
 flutter devices
-
-# Crea una app de prueba
 flutter create hola_flutter
 cd hola_flutter
-flutter run''',
+flutter run -d chrome
+
+# 3. ANDROID
+# Instala Android Studio, Android SDK y crea/inicia un emulador.
+flutter doctor --android-licenses
+flutter emulators
+flutter devices
+flutter run
+
+# 4. macOS / iOS · solo en Mac
+xcode-select --install
+flutter doctor -v
+
+# 5. COMPROBACIÓN FINAL
+flutter analyze
+flutter test''',
     steps: [
-      'Instala Git y un editor. Para principiantes, VS Code con la extensión Flutter es una ruta sencilla.',
-      'Instala Flutter estable, agrega flutter/bin al PATH y reinicia las terminales abiertas.',
-      'Ejecuta flutter doctor -v y corrige únicamente los componentes necesarios para la plataforma que usarás.',
-      'Empieza por Flutter Web si quieres validar el entorno rápido; configura Android Studio y un emulador cuando vayas a desarrollar para Android.',
-      'Crea hola_flutter, ejecútalo y prueba Hot Reload antes de continuar a las lecciones.',
+      'Instala Git y VS Code. Añade la extensión Flutter; el soporte Dart se instala junto con ella.',
+      'Instala Flutter estable y agrega la carpeta flutter/bin al PATH. Cierra y vuelve a abrir terminales y VS Code.',
+      'Ejecuta flutter doctor -v. Corrige solo lo que necesites para tu destino: no hace falta configurar Android, iOS y desktop todos a la vez.',
+      'Para empezar rápido usa Web: confirma Chrome en flutter devices y ejecuta flutter run -d chrome.',
+      'Para Android instala Android Studio, Android SDK, crea un emulador o conecta un teléfono y acepta licencias con flutter doctor --android-licenses.',
+      'Para iOS necesitas macOS y Xcode. Ejecuta xcode-select --install y vuelve a revisar flutter doctor.',
+      'Crea hola_flutter, modifica lib/main.dart y verifica Hot Reload antes de entrar a las lecciones de Flutter.',
     ],
     challenge:
-        'Consigue ejecutar la misma app de ejemplo al menos en Chrome o en un dispositivo/emulador y deja flutter doctor sin errores relacionados con ese destino.',
+        'Consigue ejecutar la app de ejemplo en Chrome o en un dispositivo/emulador y deja flutter doctor sin errores relacionados con ese destino.',
     keywords: [
       'instalacion flutter',
       'flutter sdk',
       'flutter doctor',
       'android studio',
+      'android sdk',
       'emulador',
       'vscode',
       'path',
+      'chrome',
+      'xcode',
       'hot reload',
     ],
     accentValue: 0xFF38BDF8,
