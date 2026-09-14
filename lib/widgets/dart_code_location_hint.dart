@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../data/dart_progressive_plan.dart';
 import '../models/course_section.dart';
 import '../models/guided_build_step.dart';
+import 'guided_project_panel.dart';
 
-/// Indica junto a un bloque de código Dart dónde debe colocarlo el estudiante.
+/// Indica junto a cada bloque dónde debe colocarse y cómo ejecutarse.
 ///
-/// Complementa la guía práctica completa con una referencia inmediata de
-/// archivo, ubicación y comando de ejecución.
-class DartCodeLocationHint extends StatelessWidget {
-  const DartCodeLocationHint({
+/// Aunque el archivo conserva su nombre histórico, esta guía ya funciona para
+/// Dart, Flutter y los proyectos finales.
+class LessonCodeLocationHint extends StatelessWidget {
+  const LessonCodeLocationHint({
     super.key,
     required this.section,
     this.label = 'Dónde poner este código',
@@ -21,16 +21,16 @@ class DartCodeLocationHint extends StatelessWidget {
   final bool compact;
 
   static bool supports(CourseSection section) =>
-      dartProgressivePlan.containsKey(section.id);
+      GuidedProjectPanel.supports(section) &&
+      GuidedProjectPanel.codePlacementFor(section).isNotEmpty;
 
   @override
   Widget build(BuildContext context) {
-    final step = dartProgressivePlan[section.id];
-    if (step == null) return const SizedBox.shrink();
+    final step = GuidedProjectPanel.stepFor(section);
+    final placements = GuidedProjectPanel.codePlacementFor(section);
+    if (step == null || placements.isEmpty) return const SizedBox.shrink();
 
-    final target = _primaryPlacement(step);
-    if (target == null) return const SizedBox.shrink();
-
+    final target = placements.entries.first;
     final accent = Color(section.accentValue);
     final scheme = Theme.of(context).colorScheme;
     final command = _runCommand(step);
@@ -91,10 +91,10 @@ class DartCodeLocationHint extends StatelessWidget {
               height: 1.4,
             ),
           ),
-          if (step.codePlacement.length > 1) ...[
+          if (placements.length > 1) ...[
             const SizedBox(height: 7),
             Text(
-              '+ ${step.codePlacement.length - 1} archivo(s) relacionado(s) en el bloque práctico de esta lección.',
+              '+ ${placements.length - 1} archivo(s) relacionado(s) detallados en la práctica guiada.',
               style: TextStyle(
                 color: scheme.onSurfaceVariant,
                 fontSize: 10.5,
@@ -107,6 +107,7 @@ class DartCodeLocationHint extends StatelessWidget {
             Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               spacing: 7,
+              runSpacing: 5,
               children: [
                 Icon(Icons.terminal_rounded, size: 15, color: accent),
                 const Text(
@@ -131,28 +132,12 @@ class DartCodeLocationHint extends StatelessWidget {
   }
 }
 
-MapEntry<String, String>? _primaryPlacement(GuidedBuildStep step) {
-  if (step.codePlacement.isNotEmpty) {
-    return step.codePlacement.entries.first;
-  }
-
-  final file = step.createFiles.isNotEmpty
-      ? step.createFiles.first
-      : step.modifyFiles.isNotEmpty
-          ? step.modifyFiles.first
-          : null;
-  if (file == null) return null;
-
-  return MapEntry(
-    file,
-    'Coloca aquí el código de esta lección y compáralo con el ejemplo mostrado.',
-  );
-}
-
 String? _runCommand(GuidedBuildStep step) {
-  for (final command in step.commands.reversed) {
-    if (command == 'dart run' || command.startsWith('dart run ')) {
-      return command;
+  for (final wanted in const <String>['flutter run', 'dart run']) {
+    for (final command in step.commands.reversed) {
+      if (command == wanted || command.startsWith('$wanted ')) {
+        return command;
+      }
     }
   }
   return step.commands.isEmpty ? null : step.commands.last;
