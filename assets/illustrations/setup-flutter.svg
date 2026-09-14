@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+  <rect width="900" height="560" rx="32" fill="#F8FBFF"/>
+  <rect x="52" y="48" width="796" height="464" rx="30" fill="#ECF8FF" stroke="#BAE6FD" stroke-width="2"/>
+  <rect x="86" y="100" width="470" height="322" rx="24" fill="#0F172A"/>
+  <rect x="112" y="128" width="418" height="46" rx="12" fill="#172033"/>
+  <circle cx="135" cy="151" r="7" fill="#F87171"/>
+  <circle cx="157" cy="151" r="7" fill="#FBBF24"/>
+  <circle cx="179" cy="151" r="7" fill="#34D399"/>
+  <text x="116" y="220" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#7DD3FC">$ flutter doctor -v</text>
+  <text x="116" y="262" font-family="Arial, sans-serif" font-size="18" fill="#A7F3D0">✓ Flutter SDK</text>
+  <text x="116" y="295" font-family="Arial, sans-serif" font-size="18" fill="#A7F3D0">✓ Dart SDK</text>
+  <text x="116" y="328" font-family="Arial, sans-serif" font-size="18" fill="#A7F3D0">✓ Chrome</text>
+  <text x="116" y="361" font-family="Arial, sans-serif" font-size="18" fill="#FDE68A">! Android toolchain</text>
+  <rect x="608" y="98" width="150" height="300" rx="28" fill="#111827"/>
+  <rect x="619" y="120" width="128" height="248" rx="18" fill="#FFFFFF"/>
+  <rect x="637" y="144" width="92" height="36" rx="10" fill="#E0F2FE"/>
+  <text x="651" y="167" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#0369A1">Mi App</text>
+  <rect x="637" y="201" width="92" height="58" rx="12" fill="#DBEAFE"/>
+  <rect x="637" y="272" width="92" height="58" rx="12" fill="#CCFBF1"/>
+  <circle cx="683" cy="383" r="7" fill="#94A3B8"/>
+  <path d="M625 438 L674 389 L702 417 L746 373 L776 403 L702 477 Z" fill="#38BDF8"/>
+  <path d="M702 417 L746 373 L776 403 L732 447 Z" fill="#0EA5E9"/>
+  <text x="82" y="82" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#0F172A">Preparación · Flutter</text>
+  <text x="82" y="476" font-family="Arial, sans-serif" font-size="18" fill="#334155">SDK + PATH + editor + dispositivo = entorno listo para aprender.</text>
+</svg>
