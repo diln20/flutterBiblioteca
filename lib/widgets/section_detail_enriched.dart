@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/catalog/dart_lesson_content.dart';
 import '../data/catalog/flutter_extended_lesson_content.dart';
 import '../data/catalog/flutter_lesson_content.dart';
+import '../data/catalog/project_catalog.dart';
 import '../models/course_section.dart';
 import '../models/lesson_content.dart';
 import '../services/library_controller.dart';
@@ -25,7 +26,8 @@ class SectionDetail extends StatelessWidget {
   LessonContent? get lesson =>
       dartLessonContent[section.id] ??
       flutterLessonContent[section.id] ??
-      flutterExtendedLessonContent[section.id];
+      flutterExtendedLessonContent[section.id] ??
+      projectLessonContent[section.id];
 
   @override
   Widget build(BuildContext context) {
