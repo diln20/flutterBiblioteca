@@ -55,7 +55,7 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
                   style: TextStyle(fontWeight: FontWeight.w800),
                 ),
                 Text(
-                  'Dart desde cero · Flutter paso a paso · Proyectos',
+                  'Instalación · Dart desde cero · Flutter paso a paso · Proyectos',
                   style: TextStyle(
                     fontSize: 12,
                     color: scheme.onSurfaceVariant,
