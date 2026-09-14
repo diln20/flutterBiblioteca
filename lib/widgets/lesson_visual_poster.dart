@@ -4,7 +4,7 @@ import '../models/course_section.dart';
 import 'html_asset_image.dart';
 import 'widget_visual_carousel.dart';
 
-/// Imagen principal de cada lección Flutter.
+/// Imagen principal de cada lección Flutter y proyecto final.
 ///
 /// En Flutter Web el poster se pinta como un `<img>` HTML real para que el
 /// navegador interprete el SVG completo sin perder estilos. En otras
@@ -43,6 +43,10 @@ class LessonVisualPoster extends StatelessWidget {
       'flutter-feedback-overlays' => '$_root/feedback-overlays.svg',
       'flutter-state-architecture' => '$_root/state-data.svg',
       'flutter-offline-cache' => '$_root/state-data.svg',
+      'project-01-task-manager' => '$_root/card-listtile-buttons.svg',
+      'project-02-book-library' => '$_root/list-grid.svg',
+      'project-03-weather-api' => '$_root/state-data.svg',
+      'project-04-final-app' => 'assets/illustrations/project-build.svg',
       _ => null,
     };
   }
@@ -68,6 +72,10 @@ class LessonVisualPoster extends StatelessWidget {
       'flutter-feedback-overlays' => 'SnackBar · Dialog · BottomSheet',
       'flutter-state-architecture' => 'Controller · Repository · estado por feature',
       'flutter-offline-cache' => 'API · caché · almacenamiento local · sincronización',
+      'project-01-task-manager' => 'Lista · formulario · filtros · estado · persistencia',
+      'project-02-book-library' => 'Catálogo · búsqueda · detalle · favoritos · responsive',
+      'project-03-weather-api' => 'API · loading · error · datos · repositorio',
+      'project-04-final-app' => 'Features · arquitectura · tests · CI · despliegue',
       _ => '',
     };
   }
@@ -134,9 +142,11 @@ class LessonVisualPoster extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Imagen representativa de la lección',
-                        style: TextStyle(
+                      Text(
+                        section.group == 'Proyectos Flutter'
+                            ? 'Imagen representativa del proyecto'
+                            : 'Imagen representativa de la lección',
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w900,
                         ),
