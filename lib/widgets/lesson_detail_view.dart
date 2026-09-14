@@ -11,6 +11,8 @@ import 'widget_mobile_preview.dart';
 ///
 /// En Flutter combina imagen, preview móvil y proyecto incremental. En Dart
 /// muestra la guía de archivos, ubicación del código y proyecto de consola.
+/// Los proyectos finales usan la misma estructura, pero como entregas
+/// independientes en vez de continuar "Mi Biblioteca".
 class LessonDetailView extends StatelessWidget {
   const LessonDetailView({
     super.key,
@@ -92,6 +94,23 @@ class _DesktopLearningRail extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     final accent = Color(section.accentValue);
     final isDart = section.group == 'Dart básico';
+    final isProject = section.group == 'Proyectos Flutter';
+
+    final headerIcon = isDart
+        ? Icons.code_rounded
+        : isProject
+            ? Icons.rocket_launch_outlined
+            : Icons.school_rounded;
+    final headerTitle = isDart
+        ? 'APRENDE DART PROGRAMANDO'
+        : isProject
+            ? 'CONSTRUYE UN PROYECTO COMPLETO'
+            : 'APRENDE VIENDO Y CONSTRUYENDO';
+    final headerSubtitle = isDart
+        ? 'Archivos · ubicación del código · práctica guiada'
+        : isProject
+            ? 'Imagen · archivos · ubicación del código · checklist'
+            : 'Imagen · preview móvil · práctica guiada';
 
     return ColoredBox(
       color: scheme.surfaceContainerLowest,
@@ -109,10 +128,7 @@ class _DesktopLearningRail extends StatelessWidget {
                     color: accent.withValues(alpha: .12),
                     borderRadius: BorderRadius.circular(11),
                   ),
-                  child: Icon(
-                    isDart ? Icons.code_rounded : Icons.school_rounded,
-                    color: accent,
-                  ),
+                  child: Icon(headerIcon, color: accent),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
@@ -120,9 +136,7 @@ class _DesktopLearningRail extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        isDart
-                            ? 'APRENDE DART PROGRAMANDO'
-                            : 'APRENDE VIENDO Y CONSTRUYENDO',
+                        headerTitle,
                         style: const TextStyle(
                           fontSize: 10.5,
                           fontWeight: FontWeight.w900,
@@ -131,9 +145,7 @@ class _DesktopLearningRail extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        isDart
-                            ? 'Archivos · ubicación del código · práctica guiada'
-                            : 'Imagen · preview móvil · práctica guiada',
+                        headerSubtitle,
                         style: const TextStyle(fontSize: 10.5),
                       ),
                     ],
@@ -227,6 +239,23 @@ class _CompactProjectStep extends StatelessWidget {
     final accent = Color(section.accentValue);
     final scheme = Theme.of(context).colorScheme;
     final isDart = section.group == 'Dart básico';
+    final isProject = section.group == 'Proyectos Flutter';
+
+    final icon = isDart
+        ? Icons.code_rounded
+        : isProject
+            ? Icons.rocket_launch_outlined
+            : Icons.construction_rounded;
+    final title = isDart
+        ? 'Continúa la Biblioteca de consola'
+        : isProject
+            ? 'Construye este proyecto Flutter'
+            : 'Continúa construyendo Mi Biblioteca';
+    final subtitle = isDart
+        ? 'Archivos, dónde poner el código, tareas y comandos.'
+        : isProject
+            ? 'Archivos, ubicación del código, tareas y checkpoint del proyecto.'
+            : 'Archivos, ubicación del código, tareas y resultado esperado de esta etapa.';
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
@@ -254,11 +283,7 @@ class _CompactProjectStep extends StatelessWidget {
                     color: accent.withValues(alpha: .12),
                     borderRadius: BorderRadius.circular(11),
                   ),
-                  child: Icon(
-                    isDart ? Icons.code_rounded : Icons.construction_rounded,
-                    color: accent,
-                    size: 20,
-                  ),
+                  child: Icon(icon, color: accent, size: 20),
                 ),
                 const SizedBox(width: 11),
                 Expanded(
@@ -266,9 +291,7 @@ class _CompactProjectStep extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        isDart
-                            ? 'Continúa la Biblioteca de consola'
-                            : 'Continúa construyendo Mi Biblioteca',
+                        title,
                         style: const TextStyle(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w900,
@@ -276,9 +299,7 @@ class _CompactProjectStep extends StatelessWidget {
                       ),
                       const SizedBox(height: 3),
                       Text(
-                        isDart
-                            ? 'Archivos, dónde poner el código, tareas y comandos.'
-                            : 'Archivos, tareas y resultado esperado de esta etapa.',
+                        subtitle,
                         style: const TextStyle(fontSize: 10.5, height: 1.35),
                       ),
                     ],
@@ -421,8 +442,10 @@ class _CompactPreview extends StatelessWidget {
                             children: [
                               if (LessonVisualPoster.supports(section))
                                 LessonVisualPoster(section: section),
-                              const SizedBox(height: 18),
-                              WidgetMobilePreview(section: section),
+                              if (WidgetMobilePreview.supports(section)) ...[
+                                const SizedBox(height: 18),
+                                WidgetMobilePreview(section: section),
+                              ],
                             ],
                           );
 
