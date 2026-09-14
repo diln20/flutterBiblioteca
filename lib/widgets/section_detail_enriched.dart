@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../data/catalog/setup_lesson_content.dart';
 import '../data/catalog/dart_lesson_content.dart';
 import '../data/catalog/flutter_extended_lesson_content.dart';
 import '../data/catalog/flutter_lesson_content.dart';
@@ -24,6 +25,7 @@ class SectionDetail extends StatelessWidget {
   final ValueChanged<CourseSection>? onNavigate;
 
   LessonContent? get lesson =>
+      setupLessonContent[section.id] ??
       dartLessonContent[section.id] ??
       flutterLessonContent[section.id] ??
       flutterExtendedLessonContent[section.id] ??
