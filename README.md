@@ -77,12 +77,13 @@ La ruta termina con proyectos que integran los conceptos anteriores:
 
 ## GitHub Pages
 
-El proyecto soporta las dos configuraciones habituales de GitHub Pages:
+El proyecto publica GitHub Pages mediante **Deploy from a branch**:
 
-- **GitHub Actions**: publica directamente el contenido de `build/web`.
-- **Deploy from a branch**: el workflow copia automáticamente el build a `docs/` y el `index.html` de la raíz redirige a esa aplicación.
+- El workflow genera `build/web`.
+- Copia el resultado a `docs/`.
+- El `index.html` de la raíz redirige automáticamente a `docs/`.
 
-Esto evita que GitHub Pages muestre el README como página principal cuando el repositorio todavía está configurado para publicar desde la rama `main`.
+Así se evita que GitHub Pages muestre el README como página principal y se evita mezclar despliegues por rama con despliegues por GitHub Actions.
 
 ## Estructura
 
@@ -137,4 +138,4 @@ flutter analyze
 flutter test
 ```
 
-GitHub Actions ejecuta ambas verificaciones en cada push a `main`. El workflow de Pages genera el build web con el `base-href` correcto para `/flutterBiblioteca/`, despliega mediante Actions y mantiene `docs/` como respaldo para configuraciones de Pages basadas en rama.
+GitHub Actions ejecuta ambas verificaciones en cada push a `main`. El workflow de Pages genera el build web con el `base-href` correcto para `/flutterBiblioteca/` y publica la versión estática en `docs/` para el despliegue por rama.
