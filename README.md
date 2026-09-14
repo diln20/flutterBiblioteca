@@ -1,14 +1,16 @@
 # Flutter Biblioteca
 
-Biblioteca interactiva para estudiar **Dart y Flutter** mediante una ruta progresiva, explicaciones, código de referencia, pasos guiados, ejemplos, errores comunes, ejercicios, retos y proyectos completos.
+Biblioteca interactiva para estudiar **Dart y Flutter** mediante una ruta progresiva, explicaciones, imágenes representativas, código de referencia, pasos guiados, ejemplos, errores comunes, ejercicios, retos y proyectos completos.
 
 La interfaz toma como referencia la biblioteca HTML original: conserva navegación por áreas, búsqueda, favoritos, progreso persistente y diseño responsive, pero está implementada completamente con widgets Flutter.
 
 ## Enfoque de aprendizaje
 
-La ruta no comienza directamente con widgets. Primero se completa una etapa de **Dart básico**, porque todos los conceptos posteriores de Flutter dependen del lenguaje.
+La ruta está organizada para que el estudiante **aprenda y construya al mismo tiempo**. Cada sección indica qué hacer, qué archivo crear o modificar, dónde ubicar el código y cómo comprobar el resultado.
 
 ### Etapa 1 · Dart básico
+
+Son 19 lecciones que construyen progresivamente una **biblioteca de consola**:
 
 1. Qué es Dart y primer programa.
 2. Variables, `var`, `final` y `const`.
@@ -30,11 +32,15 @@ La ruta no comienza directamente con widgets. Primero se completa una etapa de *
 18. Archivos, imports y paquetes.
 19. Proyecto integrador: biblioteca de consola.
 
+Cada lección Dart incluye **Sintaxis esencial**, ejemplos, ejercicios y ejemplo integrador con una tarjeta que señala el archivo recomendado, la ubicación del código y el comando para ejecutarlo.
+
 ### Etapa 2 · Flutter
 
-Después de la base de Dart, la ruta continúa con:
+La ruta Flutter también tiene 19 pasos y construye progresivamente una misma app llamada **Mi Biblioteca**.
 
-- Introducción a Flutter y árbol de widgets.
+Primera parte:
+
+- Introducción a Flutter, `MaterialApp`, `Scaffold`, `AppBar` y FAB.
 - Widgets y layouts responsive.
 - Estado y reactividad.
 - Rutas y navegación.
@@ -46,11 +52,30 @@ Después de la base de Dart, la ruta continúa con:
 - Rendimiento y reconstrucciones.
 - Accesibilidad y UX.
 
-Tanto las lecciones de Dart como las de Flutter cuentan con contenido extendido: **sintaxis esencial, conceptos clave, ejemplos explicados, errores comunes y ejercicios con pistas**, además del código integrador y el reto final de cada módulo.
+Segunda parte:
+
+- Ciclo de vida, `State`, `BuildContext`, `mounted` y `dispose`.
+- `ListView`, `GridView`, builders y keys.
+- Material 3, `ThemeData` y `ColorScheme`.
+- Animaciones implícitas y explícitas.
+- Gestos, teclado y foco.
+- `SnackBar`, `Dialog`, `BottomSheet` y feedback.
+- Arquitectura de estado por feature.
+- Offline, caché y sincronización.
+
+Cada paso Flutter incluye:
+
+- imagen representativa del tema;
+- imágenes individuales de widgets cuando aplica;
+- preview visual de móvil;
+- sintaxis, ejemplos, errores y ejercicios;
+- proyecto continuo con **archivos a crear** y **archivos a modificar**;
+- sección **Dónde poner el código**;
+- resultado esperado y checkpoint.
 
 ### Etapa 3 · Proyectos Flutter
 
-La ruta termina con proyectos que integran los conceptos anteriores:
+La ruta termina con 4 proyectos independientes. Cada uno cuenta con contenido enriquecido, imagen, comandos, estructura de archivos, ubicación del código, práctica y checklist final.
 
 1. Gestor de tareas con CRUD, filtros, estado y persistencia.
 2. Biblioteca personal con búsqueda, favoritos, navegación y responsive.
@@ -65,27 +90,31 @@ La ruta termina con proyectos que integran los conceptos anteriores:
 - Sidebar de ruta de aprendizaje en pantallas grandes.
 - Búsqueda por título, categoría, nivel y palabras clave.
 - Resultados de búsqueda resaltados visualmente.
-- Filtros por categoría, **nivel** y vista de solo favoritos.
+- Filtros por categoría, nivel y vista de solo favoritos.
 - Favoritos persistentes con `shared_preferences`.
 - Progreso persistente y restauración de la última sección abierta.
-- **34 módulos** organizados en Dart, Flutter y proyectos completos.
+- **42 módulos**: 19 Dart + 19 Flutter + 4 proyectos.
 - Vista de detalle con explicación, sintaxis, ejemplos, errores comunes, ejercicios, código y reto.
+- Imágenes SVG/HTML representativas y carrusel de widgets en Flutter.
 - Navegación anterior/siguiente entre módulos.
-- Pruebas del catálogo, contenido educativo y proyectos.
+- Guías prácticas con rutas de archivos y ubicación exacta del código.
+- Pruebas del catálogo, contenido educativo, imágenes, proyectos y planes progresivos.
 - Análisis estático y tests automáticos en GitHub Actions.
 - Build y despliegue de Flutter Web con GitHub Pages.
 
 ## GitHub Pages
 
-El proyecto publica GitHub Pages mediante **Deploy from a branch**:
+El workflow de despliegue:
 
-- El workflow genera `build/web`.
-- Copia el resultado a `docs/`.
-- El `index.html` de la raíz redirige automáticamente a `docs/`.
+1. instala dependencias;
+2. ejecuta `flutter analyze`;
+3. ejecuta `flutter test`;
+4. genera `flutter build web --release`;
+5. copia el resultado a `docs/` como fallback para Pages por rama.
 
-Así se evita que GitHub Pages muestre el README como página principal y se evita mezclar despliegues por rama con despliegues por GitHub Actions.
+El build utiliza el `base-href` correspondiente a `/flutterBiblioteca/` y ajusta el fallback publicado en `docs/`.
 
-## Estructura
+## Estructura principal
 
 ```text
 lib/
@@ -94,11 +123,17 @@ lib/
       dart_basics_catalog.dart
       dart_lesson_content.dart
       flutter_catalog.dart
+      flutter_extended_catalog.dart
       flutter_lesson_content.dart
+      flutter_extended_lesson_content.dart
       project_catalog.dart
+    dart_progressive_plan.dart
+    flutter_code_placement.dart
+    progressive_app_plan.dart
     course_catalog.dart
   models/
     course_section.dart
+    guided_build_step.dart
     lesson_content.dart
   screens/
     library_home_page.dart
@@ -106,17 +141,24 @@ lib/
     library_controller.dart
     progress_store.dart
   widgets/
-    filter_label.dart
+    dart_code_location_hint.dart
+    guided_project_panel.dart
+    html_asset_image.dart
+    lesson_illustration.dart
+    lesson_visual_poster.dart
     library_filters.dart
     library_sidebar.dart
     progress_dashboard.dart
     section_card.dart
     section_detail_enriched.dart
+    widget_individual_gallery.dart
+    widget_mobile_preview.dart
+    widget_visual_carousel.dart
   app.dart
   main.dart
 ```
 
-El archivo `course_catalog.dart` solo compone las etapas. El catálogo base y el contenido extendido están separados para que la biblioteca pueda crecer sin volver a crear archivos monolíticos.
+Los catálogos describen la ruta. Los archivos `*_lesson_content.dart` contienen teoría y ejemplos enriquecidos. Los planes progresivos describen la práctica, archivos y checkpoints. Los widgets visuales muestran imágenes, previews y guías de ubicación del código.
 
 ## Ejecutar
 
@@ -136,6 +178,7 @@ flutter run -d chrome
 ```bash
 flutter analyze
 flutter test
+flutter build web
 ```
 
-GitHub Actions ejecuta ambas verificaciones en cada push a `main`. El workflow de Pages genera el build web con el `base-href` correcto para `/flutterBiblioteca/` y publica la versión estática en `docs/` para el despliegue por rama.
+GitHub Actions ejecuta análisis y pruebas en cada push a `main`; el workflow de despliegue también valida y construye Flutter Web antes de actualizar `docs/`.
