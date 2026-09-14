@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../data/catalog/project_catalog.dart';
 import '../data/dart_progressive_plan.dart';
+import '../data/flutter_code_placement.dart';
 import '../data/progressive_app_plan.dart';
 import '../models/course_section.dart';
 import '../models/guided_build_step.dart';
@@ -15,10 +17,20 @@ class GuidedProjectPanel extends StatelessWidget {
 
   static bool supports(CourseSection section) =>
       progressiveAppPlan.containsKey(section.id) ||
-      dartProgressivePlan.containsKey(section.id);
+      dartProgressivePlan.containsKey(section.id) ||
+      projectBuildPlan.containsKey(section.id);
 
   static GuidedBuildStep? stepFor(CourseSection section) =>
-      progressiveAppPlan[section.id] ?? dartProgressivePlan[section.id];
+      progressiveAppPlan[section.id] ??
+      dartProgressivePlan[section.id] ??
+      projectBuildPlan[section.id];
+
+  static Map<String, String> codePlacementFor(CourseSection section) {
+    final step = stepFor(section);
+    if (step == null) return const <String, String>{};
+    if (step.codePlacement.isNotEmpty) return step.codePlacement;
+    return flutterCodePlacement[section.id] ?? const <String, String>{};
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +38,8 @@ class GuidedProjectPanel extends StatelessWidget {
     if (step == null) return const SizedBox.shrink();
 
     final isDart = dartProgressivePlan.containsKey(section.id);
+    final isProject = projectBuildPlan.containsKey(section.id);
+    final codePlacement = codePlacementFor(section);
     final accent = Color(section.accentValue);
     final scheme = Theme.of(context).colorScheme;
 
@@ -47,6 +61,7 @@ class GuidedProjectPanel extends StatelessWidget {
             step: step,
             accent: accent,
             isDart: isDart,
+            isProject: isProject,
           ),
           const SizedBox(height: 14),
           LinearProgressIndicator(
@@ -107,7 +122,7 @@ class GuidedProjectPanel extends StatelessWidget {
               );
             },
           ),
-          if (step.codePlacement.isNotEmpty) ...[
+          if (codePlacement.isNotEmpty) ...[
             const SizedBox(height: 18),
             const _SectionLabel(
               icon: Icons.account_tree_outlined,
@@ -115,7 +130,7 @@ class GuidedProjectPanel extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             _CodePlacementList(
-              entries: step.codePlacement,
+              entries: codePlacement,
               accent: accent,
             ),
           ],
@@ -124,7 +139,9 @@ class GuidedProjectPanel extends StatelessWidget {
             icon: Icons.construction_rounded,
             label: isDart
                 ? 'Programa esta parte ahora'
-                : 'Construye esta parte ahora',
+                : isProject
+                    ? 'Construye este proyecto ahora'
+                    : 'Construye esta parte ahora',
           ),
           const SizedBox(height: 10),
           _TaskList(tasks: step.tasks, accent: accent),
@@ -155,11 +172,13 @@ class _Header extends StatelessWidget {
     required this.step,
     required this.accent,
     required this.isDart,
+    required this.isProject,
   });
 
   final GuidedBuildStep step;
   final Color accent;
   final bool isDart;
+  final bool isProject;
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +194,11 @@ class _Header extends StatelessWidget {
             borderRadius: BorderRadius.circular(13),
           ),
           child: Icon(
-            isDart ? Icons.code_rounded : Icons.build_circle_outlined,
+            isDart
+                ? Icons.code_rounded
+                : isProject
+                    ? Icons.rocket_launch_outlined
+                    : Icons.build_circle_outlined,
             color: accent,
           ),
         ),
@@ -187,7 +210,9 @@ class _Header extends StatelessWidget {
               Text(
                 isDart
                     ? 'PROYECTO DART · BIBLIOTECA DE CONSOLA'
-                    : 'PROYECTO CONTINUO · MI BIBLIOTECA',
+                    : isProject
+                        ? 'PROYECTO PRÁCTICO · FLUTTER'
+                        : 'PROYECTO CONTINUO · MI BIBLIOTECA',
                 style: TextStyle(
                   color: accent,
                   fontSize: 10.5,
@@ -207,7 +232,9 @@ class _Header extends StatelessWidget {
               Text(
                 isDart
                     ? 'Paso ${step.number} de ${step.total} · Continúa sobre el mismo proyecto de consola.'
-                    : 'Paso ${step.number} de ${step.total} · Continúa sobre lo construido en la lección anterior.',
+                    : isProject
+                        ? 'Proyecto ${step.number} de ${step.total} · Construcción independiente para integrar lo aprendido.'
+                        : 'Paso ${step.number} de ${step.total} · Continúa sobre lo construido en la lección anterior.',
                 style: TextStyle(
                   color: scheme.onSurfaceVariant,
                   fontSize: 11.5,
