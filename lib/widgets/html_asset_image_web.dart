@@ -1,15 +1,11 @@
-// ignore_for_file: deprecated_member_use
-
-import 'dart:html' as html;
-import 'dart:ui_web' as ui_web;
-
 import 'package:flutter/material.dart';
+import 'package:web/web.dart' as web;
 
 /// Renderiza el asset con un `<img>` HTML real cuando la app corre en web.
 ///
 /// El navegador interpreta directamente los SVG (incluyendo CSS interno),
 /// evitando las diferencias de compatibilidad de flutter_svg.
-class HtmlAssetImage extends StatefulWidget {
+class HtmlAssetImage extends StatelessWidget {
   const HtmlAssetImage({
     super.key,
     required this.asset,
@@ -24,36 +20,16 @@ class HtmlAssetImage extends StatefulWidget {
   final Widget? placeholder;
 
   @override
-  State<HtmlAssetImage> createState() => _HtmlAssetImageState();
-}
+  Widget build(BuildContext context) {
+    final assetUrl = 'assets/$asset';
+    final objectFit = _objectFit(fit);
+    final label = semanticsLabel ?? '';
 
-class _HtmlAssetImageState extends State<HtmlAssetImage> {
-  late String _viewType;
-
-  @override
-  void initState() {
-    super.initState();
-    _registerView();
-  }
-
-  @override
-  void didUpdateWidget(covariant HtmlAssetImage oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.asset != widget.asset || oldWidget.fit != widget.fit) {
-      _registerView();
-    }
-  }
-
-  void _registerView() {
-    _viewType = 'lesson-html-image-${identityHashCode(this)}-${DateTime.now().microsecondsSinceEpoch}';
-    final assetUrl = 'assets/${widget.asset}';
-    final objectFit = _objectFit(widget.fit);
-    final label = widget.semanticsLabel ?? '';
-
-    ui_web.platformViewRegistry.registerViewFactory(
-      _viewType,
-      (int viewId) {
-        final image = html.ImageElement()
+    return HtmlElementView.fromTagName(
+      tagName: 'img',
+      onElementCreated: (Object element) {
+        final image = element as web.HTMLImageElement;
+        image
           ..src = assetUrl
           ..alt = label;
 
@@ -65,27 +41,11 @@ class _HtmlAssetImageState extends State<HtmlAssetImage> {
           ..objectPosition = 'center'
           ..pointerEvents = 'none';
 
-        final wrapper = html.DivElement();
-        wrapper.style
-          ..width = '100%'
-          ..height = '100%'
-          ..overflow = 'hidden'
-          ..backgroundColor = 'transparent';
-        wrapper.attributes['role'] = 'img';
+        image.setAttribute('role', 'img');
         if (label.isNotEmpty) {
-          wrapper.attributes['aria-label'] = label;
+          image.setAttribute('aria-label', label);
         }
-        wrapper.append(image);
-        return wrapper;
       },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return HtmlElementView(
-      key: ValueKey(_viewType),
-      viewType: _viewType,
     );
   }
 }
