@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../models/course_section.dart';
+import 'svg_compat.dart';
 import 'widget_visual_carousel.dart';
 
 /// Imagen principal de cada lección Flutter.
@@ -100,11 +100,19 @@ class LessonVisualPoster extends StatelessWidget {
         children: [
           AspectRatio(
             aspectRatio: 900 / 560,
-            child: SvgPicture.asset(
-              asset,
-              width: double.infinity,
+            child: CompatibleSvgAsset(
+              asset: asset,
               fit: BoxFit.cover,
               semanticsLabel: 'Imagen visual de ${section.title}',
+              placeholder: ColoredBox(
+                color: scheme.surfaceContainerLow,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: accent,
+                  ),
+                ),
+              ),
             ),
           ),
           Padding(
