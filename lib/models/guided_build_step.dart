@@ -10,6 +10,7 @@ class GuidedBuildStep {
     required this.expectedResult,
     required this.checkpoint,
     this.commands = const <String>[],
+    this.codePlacement = const <String, String>{},
   });
 
   final int number;
@@ -22,4 +23,10 @@ class GuidedBuildStep {
   final String expectedResult;
   final String checkpoint;
   final List<String> commands;
+
+  /// Explica qué código debe ir en cada archivo del paso.
+  ///
+  /// La clave es la ruta relativa dentro del proyecto y el valor describe la
+  /// responsabilidad o el bloque de código que el estudiante debe ubicar allí.
+  final Map<String, String> codePlacement;
 }
