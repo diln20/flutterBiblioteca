@@ -6,7 +6,29 @@ La interfaz toma como referencia la biblioteca HTML original: conserva navegaci�
 
 ## Enfoque de aprendizaje
 
-La ruta está organizada para que el estudiante **aprenda y construya al mismo tiempo**. Cada sección indica qué hacer, qué archivo crear o modificar, dónde ubicar el código y cómo comprobar el resultado.
+La ruta está organizada para que el estudiante **prepare su entorno, aprenda y construya al mismo tiempo**. Cada sección indica qué hacer, qué archivo crear o modificar, dónde ubicar el código y cómo comprobar el resultado.
+
+### Etapa 0 · Preparación del entorno
+
+Antes de programar hay dos módulos de instalación y configuración:
+
+1. **Instalación y configuración de Dart**
+   - explica que Flutter ya incluye el SDK completo de Dart;
+   - instalación independiente para Windows, macOS y Ubuntu/Debian cuando sea necesaria;
+   - configuración de PATH;
+   - VS Code + extensión Dart;
+   - verificación con `dart --version`, `dart create`, `dart run`, `dart format` y `dart analyze`.
+
+2. **Instalación y configuración de Flutter**
+   - instalación del SDK estable y configuración de `flutter/bin` en PATH;
+   - VS Code + extensiones Flutter/Dart;
+   - diagnóstico con `flutter doctor -v`;
+   - inicio rápido con Flutter Web;
+   - configuración de Android Studio, Android SDK, licencias, emulador o dispositivo físico;
+   - nota específica para macOS/iOS con Xcode;
+   - primera aplicación y prueba de Hot Reload.
+
+La ruta deja claro que **si vas a instalar Flutter no necesitas instalar Dart por separado**, porque Flutter incluye Dart.
 
 ### Etapa 1 · Dart básico
 
@@ -93,7 +115,7 @@ La ruta termina con 4 proyectos independientes. Cada uno cuenta con contenido en
 - Filtros por categoría, nivel y vista de solo favoritos.
 - Favoritos persistentes con `shared_preferences`.
 - Progreso persistente y restauración de la última sección abierta.
-- **42 módulos**: 19 Dart + 19 Flutter + 4 proyectos.
+- **44 módulos**: 2 de preparación + 19 Dart + 19 Flutter + 4 proyectos.
 - Vista de detalle con explicación, sintaxis, ejemplos, errores comunes, ejercicios, código y reto.
 - Imágenes SVG/HTML representativas y carrusel de widgets en Flutter.
 - Navegación anterior/siguiente entre módulos.
@@ -120,6 +142,8 @@ El build utiliza el `base-href` correspondiente a `/flutterBiblioteca/` y ajusta
 lib/
   data/
     catalog/
+      setup_catalog.dart
+      setup_lesson_content.dart
       dart_basics_catalog.dart
       dart_lesson_content.dart
       flutter_catalog.dart
