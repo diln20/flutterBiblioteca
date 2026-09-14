@@ -104,7 +104,7 @@ const dartProgressivePlan = <String, GuidedBuildStep>{
     },
     tasks: [
       'Crea una ficha multilínea con título, año, precio y disponibilidad.',
-      'Usa interpolación con $variable y ${expresion}.',
+      r'Usa interpolación con $variable y ${expresion}.',
       'Normaliza una búsqueda con trim() y toLowerCase().',
       'Prueba contains() para saber si un título contiene una palabra.',
     ],
