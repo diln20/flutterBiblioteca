@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+  <rect width="900" height="560" rx="32" fill="#F8FBFF"/>
+  <rect x="64" y="56" width="772" height="448" rx="28" fill="#EAF4FF" stroke="#BFDBFE" stroke-width="2"/>
+  <rect x="110" y="108" width="480" height="304" rx="22" fill="#0F172A"/>
+  <rect x="136" y="136" width="428" height="48" rx="12" fill="#172033"/>
+  <circle cx="158" cy="160" r="7" fill="#F87171"/>
+  <circle cx="180" cy="160" r="7" fill="#FBBF24"/>
+  <circle cx="202" cy="160" r="7" fill="#34D399"/>
+  <text x="140" y="228" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#7DD3FC">$ dart --version</text>
+  <text x="140" y="268" font-family="Arial, sans-serif" font-size="20" fill="#E2E8F0">Dart SDK · stable</text>
+  <text x="140" y="324" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#A7F3D0">$ dart run</text>
+  <text x="140" y="360" font-family="Arial, sans-serif" font-size="18" fill="#CBD5E1">Hola, Dart ✓</text>
+  <rect x="630" y="128" width="142" height="142" rx="28" fill="#FFFFFF" stroke="#93C5FD" stroke-width="2"/>
+  <path d="M666 165 L720 165 L752 197 L708 239 L666 197 Z" fill="#0EA5E9"/>
+  <path d="M720 165 L752 197 L708 197 Z" fill="#38BDF8"/>
+  <rect x="622" y="308" width="158" height="108" rx="18" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="2"/>
+  <text x="644" y="340" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Checklist</text>
+  <text x="644" y="370" font-family="Arial, sans-serif" font-size="14" fill="#334155">✓ SDK</text>
+  <text x="644" y="393" font-family="Arial, sans-serif" font-size="14" fill="#334155">✓ PATH</text>
+  <text x="644" y="416" font-family="Arial, sans-serif" font-size="14" fill="#334155">✓ VS Code</text>
+  <text x="92" y="92" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#0F172A">Preparación · Dart</text>
+  <text x="92" y="474" font-family="Arial, sans-serif" font-size="18" fill="#334155">Instala, verifica y ejecuta tu primer proyecto antes de continuar.</text>
+</svg>
