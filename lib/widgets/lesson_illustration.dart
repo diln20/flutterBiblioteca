@@ -17,6 +17,12 @@ class LessonIllustration extends StatelessWidget {
     final group = section.group.toLowerCase();
     final id = section.id.toLowerCase();
 
+    if (id == 'setup-dart') {
+      return 'assets/illustrations/setup-dart.svg';
+    }
+    if (id == 'setup-flutter') {
+      return 'assets/illustrations/setup-flutter.svg';
+    }
     if (id.contains('widget-lifecycle')) {
       return 'assets/illustrations/widget-lifecycle.svg';
     }
