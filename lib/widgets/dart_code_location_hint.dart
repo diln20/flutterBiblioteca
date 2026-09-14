@@ -132,6 +132,19 @@ class LessonCodeLocationHint extends StatelessWidget {
   }
 }
 
+/// Nombre conservado para no romper los widgets que ya lo usan.
+class DartCodeLocationHint extends LessonCodeLocationHint {
+  const DartCodeLocationHint({
+    super.key,
+    required super.section,
+    super.label = 'Dónde poner este código',
+    super.compact = false,
+  });
+
+  static bool supports(CourseSection section) =>
+      LessonCodeLocationHint.supports(section);
+}
+
 String? _runCommand(GuidedBuildStep step) {
   for (final wanted in const <String>['flutter run', 'dart run']) {
     for (final command in step.commands.reversed) {
