@@ -1,5 +1,6 @@
 import 'package:flutter_biblioteca/data/catalog/flutter_catalog.dart';
 import 'package:flutter_biblioteca/data/catalog/flutter_extended_catalog.dart';
+import 'package:flutter_biblioteca/data/flutter_code_placement.dart';
 import 'package:flutter_biblioteca/data/progressive_app_plan.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -19,12 +20,37 @@ void main() {
     }
   });
 
+  test('every Flutter lesson says exactly where code belongs', () {
+    final flutterSections = [...flutterCatalog, ...flutterExtendedCatalog];
+
+    expect(flutterCodePlacement.length, flutterSections.length);
+
+    for (final section in flutterSections) {
+      final placement = flutterCodePlacement[section.id];
+      expect(
+        placement,
+        isNotNull,
+        reason: 'Missing code placement for ${section.id}',
+      );
+      expect(placement, isNotEmpty);
+      expect(
+        placement!.entries.every(
+          (entry) => entry.key.trim().isNotEmpty && entry.value.trim().isNotEmpty,
+        ),
+        isTrue,
+      );
+    }
+  });
+
   test('guided project steps are sequential', () {
     final steps = progressiveAppPlan.values.toList()
       ..sort((a, b) => a.number.compareTo(b.number));
 
     expect(steps.length, 19);
-    expect(steps.map((step) => step.number).toList(), List<int>.generate(19, (index) => index + 1));
+    expect(
+      steps.map((step) => step.number).toList(),
+      List<int>.generate(19, (index) => index + 1),
+    );
     expect(steps.every((step) => step.total == 19), isTrue);
   });
 }
