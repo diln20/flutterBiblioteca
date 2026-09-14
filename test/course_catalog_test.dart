@@ -1,4 +1,6 @@
 import 'package:flutter_biblioteca/data/catalog/dart_lesson_content.dart';
+import 'package:flutter_biblioteca/data/catalog/setup_catalog.dart';
+import 'package:flutter_biblioteca/data/catalog/setup_lesson_content.dart';
 import 'package:flutter_biblioteca/data/course_catalog.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -20,7 +22,27 @@ void main() {
     }
   });
 
-  test('the learning route starts with the complete Dart basics stage', () {
+  test('the learning route starts with environment setup', () {
+    expect(setupCatalog.map((item) => item.id).toList(), [
+      'setup-dart',
+      'setup-flutter',
+    ]);
+    expect(courseCatalog.take(2).map((item) => item.id).toList(), [
+      'setup-dart',
+      'setup-flutter',
+    ]);
+
+    for (final section in setupCatalog) {
+      final content = setupLessonContent[section.id];
+      expect(content, isNotNull);
+      expect(content!.concepts.length, greaterThanOrEqualTo(4));
+      expect(content.examples.length, greaterThanOrEqualTo(4));
+      expect(content.commonMistakes.length, greaterThanOrEqualTo(4));
+      expect(content.exercises.length, greaterThanOrEqualTo(3));
+    }
+  });
+
+  test('the complete Dart basics stage follows setup', () {
     const expectedDartIds = <String>[
       'dart-01-introduccion',
       'dart-02-variables-constantes',
@@ -43,19 +65,25 @@ void main() {
       'dart-19-proyecto-integrador',
     ];
 
-    final firstStageIds = courseCatalog
+    final dartStart = setupCatalog.length;
+    final dartIds = courseCatalog
+        .skip(dartStart)
         .take(expectedDartIds.length)
         .map((section) => section.id)
         .toList();
 
-    expect(firstStageIds, expectedDartIds);
+    expect(dartIds, expectedDartIds);
     expect(
-      courseCatalog.take(expectedDartIds.length).every(
-            (section) => section.group == 'Dart básico',
-          ),
+      courseCatalog
+          .skip(dartStart)
+          .take(expectedDartIds.length)
+          .every((section) => section.group == 'Dart básico'),
       isTrue,
     );
-    expect(courseCatalog[expectedDartIds.length].id, 'flutter-intro');
+    expect(
+      courseCatalog[dartStart + expectedDartIds.length].id,
+      'flutter-intro',
+    );
   });
 
   test('Dart basics covers the essential language concepts', () {
